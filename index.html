@@ -1,0 +1,1015 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Spectral by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+		/* Countdown styles: minimalist, centered, responsive */
+		/* Adjust the bottom padding (3rd value) to change space above the invite text */
+		.countdown-section { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 0 0.5rem; }
+		.countdown-grid { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; align-items:flex-end; }
+		.countdown-item { display:flex; flex-direction:column; align-items:center; min-width:80px; }
+		#countdown header.major { text-align:center; }
+		#countdown header.major h2 { color:#adadad; text-align:center; }
+		#two.wrapper header.major, #memory.wrapper header.major { text-align:center; }
+		#one.wrapper header.major h2,
+		#two.wrapper header.major h2,
+		#three.wrapper .inner > h2,
+		#memory.wrapper header.major h2{ color:var(--info-text); }
+		#one.wrapper header.major h2,
+		#two.wrapper header.major h2,
+		#three.wrapper .inner > h2,
+		#memory.wrapper header.major h2{ border-bottom-color:#B4C5CF; font-size:1.35em; }
+		.countdown-number { font-family:inherit; font-weight:700; font-size:2.5rem; line-height:1; color:#adadad; }
+		.countdown-label { font-size:0.85rem; color:#adadad; margin-top:0.25rem; letter-spacing:0.03em; }
+		.countdown-message { margin-top:1rem; font-size:1.1rem; color:#2a7f62; font-weight:600; }
+		@media (max-width:480px){ .countdown-number{font-size:1.8rem;} .countdown-item{min-width:60px;} }
+		.invite-wrapper{ background-color:#ffffff; display:inline-flex; align-items:center; justify-content:center; padding:10px 12px; border-radius:6px; }
+		@media (max-width:480px){ .invite-wrapper{ padding:10px 8px; } }
+		.invite-text{ text-align:center; color:#222; margin:0 0 10px 0; font-size:1rem; }
+
+		#one.wrapper{ background:#ffffff; }
+		#one{ scroll-margin-top:2rem; }
+		#one.wrapper h1, #one.wrapper h2, #one.wrapper h3, #one.wrapper p, #one.wrapper span, #one.wrapper div{ color:#222222; }
+		#one.wrapper .major h2{ border-bottom:solid 2px #B4C5CF; display:inline-block; padding-bottom:0.4em; position:relative; }
+		#one.wrapper .major h2:after{ content:""; display:block; height:1px; }
+		#one.wrapper .inner{ background-image:none !important; background-color:#ffffff !important; }
+		#one.wrapper .inner:before, #one.wrapper .inner:after{ background:none !important; }
+
+		#two.wrapper{ background:#ffffff !important; color:#222222; }
+		#two.wrapper h1, #two.wrapper h2, #two.wrapper h3, #two.wrapper p, #two.wrapper span, #two.wrapper div{ color:#222222; }
+		#two.wrapper header.major h2, #two.wrapper header.major h3, #two.wrapper header.major h4, #two.wrapper header.major h5, #two.wrapper header.major h6{ border-bottom-color:#B4C5CF; }
+		#two.wrapper header.major h2{ font-size:1.35em; margin:0 auto 3.5em auto; display:table; text-align:center; color:var(--info-text); font-weight:800; border-bottom:solid 2px #B4C5CF; padding-bottom:0.4em; position:relative; letter-spacing:0.225em; text-transform:uppercase; }
+		#two.wrapper .inner{ padding-top:3rem; }
+		#two.wrapper .timeline::before{ background:#e0e0e0; width:1px; }
+		#two.wrapper .timeline-item .meta{ display:flex; align-items:center; gap:18px; }
+		#two.wrapper .timeline-item.left .meta{ flex-direction:row-reverse; justify-content:flex-end; }
+		#two.wrapper .timeline-item.right .meta{ justify-content:flex-start; }
+		#two.wrapper .timeline-item .time{ color:#555555; letter-spacing:0.05em; font-size:0.85rem; font-weight:400; }
+		#two.wrapper .timeline-item.left .time{ text-align:right; }
+		#two.wrapper .timeline-item.right .time{ text-align:left; }
+		#two.wrapper .timeline-item.left::after, #two.wrapper .timeline-item.right::after{ display:none; }
+		#two.wrapper .timeline-item .card{ display:inline-block; width:fit-content; max-width:400px; background:rgba(0,0,0,0.02); color:#555555; border:1px solid rgba(0,0,0,0.05); box-shadow:none; padding:0.5rem 1rem; }
+		#two.wrapper .timeline-item .card h3, #two.wrapper .timeline-item .card p, #two.wrapper .timeline-item .card span{ color:#555555; letter-spacing:0.225em; }
+		#two.wrapper .timeline-item .card h3{ font-weight:500; text-transform:uppercase; }
+		#two.wrapper .timeline-item .meta-row{ display:block; }
+		#two.wrapper .timeline-item .icon{ position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:26px; height:26px; display:flex; align-items:center; justify-content:center; margin:0; flex:0 0 26px; }
+		#two.wrapper .timeline-item .icon svg{ width:20px; height:20px; }
+		#two.wrapper .timeline-item .icon svg path{ fill:#8aa7b8; opacity:0.6; }
+		#two.wrapper .program-disclaimer{ margin:50px auto 0; max-width:500px; text-align:center; font-size:0.8rem; line-height:1.55; color:#888888; font-family:inherit; letter-spacing:normal; text-transform:none; }
+
+		@media (max-width:768px){
+			#three{ scroll-margin-top:1rem; }
+			#location{ scroll-margin-top:2rem; }
+			#one.wrapper{ margin-bottom:0; padding-bottom:0; border:none !important; box-shadow:none !important; }
+			#two.wrapper{ margin-top:0; padding-top:0; border:none !important; box-shadow:none !important; }
+			#one.wrapper:before, #one.wrapper:after, #two.wrapper:before, #two.wrapper:after,
+			#three.wrapper:before, #three.wrapper:after,
+			#memory.wrapper:before, #memory.wrapper:after{ display:none !important; }
+			#two.wrapper, #three.wrapper, #memory.wrapper{ border:none !important; box-shadow:none !important; }
+			#two.wrapper + #three.wrapper{ margin-top:-1px; }
+			#three.wrapper{ margin-bottom:0; padding-bottom:0; }
+			#memory.wrapper{ margin-top:0; padding-top:0; }
+			#three.wrapper + #memory.wrapper{ margin-top:-1px; }
+		}
+
+		@media (max-width:1280px){
+			section, section.wrapper, section.wrapper.style1, section.wrapper.style2, section.wrapper.style3{
+				border-top:none !important;
+				border-bottom:none !important;
+				box-shadow:none !important;
+				margin-top:0;
+				margin-bottom:0;
+			}
+			section:before, section:after,
+			section.wrapper:before, section.wrapper:after,
+			section.wrapper.style1:before, section.wrapper.style1:after,
+			section.wrapper.style2:before, section.wrapper.style2:after,
+			section.wrapper.style3:before, section.wrapper.style3:after{
+				display:none !important;
+				background:none !important;
+			}
+			#three.wrapper{ border:none !important; box-shadow:none !important; margin-top:0; }
+		}
+
+
+		/* Invite image hover/focus - show clickable affordance similar to .button.primary */
+		#invite-img{ cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+		#invite-img:hover, #invite-img:focus{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.18); }
+		#invite-img:focus{ outline:none; box-shadow:0 0 0 4px rgba(237,73,51,0.12); }
+
+		/* Modal / lightbox for invite image */
+		.invite-modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.9); z-index:10000; padding:1rem; }
+		.invite-modal img{ max-width:calc(100% - 2rem); max-height:calc(100% - 2rem); box-shadow:0 8px 30px rgba(0,0,0,0.6); border-radius:4px; }
+		.invite-close{ position:absolute; top:1rem; right:1rem; background:transparent; border:none; color:#fff; font-size:2rem; line-height:1; cursor:pointer; }
+		body.modal-open{ overflow:hidden; }
+
+		/* Timeline variables and styles */
+		:root{
+			--tl-primary: #8aa7b8; /* primary color */
+			--tl-bg: #D0A29F; /* background for event cards */
+			--tl-text: #000000; /* main text color */
+			--tl-accent: #B4C5CF; /* section background/accent */
+			--tl-bubble: #D0A29F; /* bubble color */
+		}
+
+		.timeline { position:relative; padding:2rem 0; }
+		/* Apply section background and text color */
+		#two.wrapper { background: var(--tl-accent); color: var(--tl-text); }
+		.timeline::before{ content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:#e0e0e0; transform:translateX(-50%); }
+		.timeline-item{ position:relative; width:50%; padding:1rem 2rem; margin-bottom:1rem; box-sizing:border-box; display:flex; align-items:flex-start; }
+		.timeline-item .time{ font-weight:400; color:#555555; margin-bottom:0; font-size:0.85rem; letter-spacing:0.05em; }
+		.timeline-item .card{ background:rgba(230, 180, 180, 0.1); color:#555555; padding:0.6rem 0.9rem; border-radius:10px; border:1px solid rgba(0,0,0,0.05); box-shadow:0 10px 30px rgba(0,0,0,0.02); width:100%; }
+		.timeline-item .icon{ position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
+		.timeline-item.left{ left:0; text-align:right; flex-direction:row-reverse; }
+		.timeline-item.left .card{ text-align:right; }
+		.timeline-item.left::after{ content:""; position:absolute; right:-6px; top:20px; width:12px; height:12px; background:transparent; border:1px solid #d9d9d9; border-radius:50%; box-sizing:border-box; }
+		.timeline-item.right{ left:50%; }
+		.timeline-item.right::after{ content:""; position:absolute; left:-6px; top:20px; width:12px; height:12px; background:transparent; border:1px solid #d9d9d9; border-radius:50%; box-sizing:border-box; }
+		.timeline-item .meta{ display:flex; align-items:center; }
+		.timeline-item h3{ margin:0; font-size:1.05rem; font-weight:500; letter-spacing:0.05em; }
+		@media (max-width:1280px){
+			#two.wrapper .timeline{ padding:1.5rem 0; }
+			#two.wrapper .timeline::before{ left:24px; transform:none; }
+			#two.wrapper .timeline-item{ width:100%; padding-left:64px; padding-right:1rem; margin-bottom:20px; }
+			#two.wrapper .timeline-item.left, #two.wrapper .timeline-item.right{ left:0; text-align:left; flex-direction:row; }
+			#two.wrapper .timeline-item .meta,
+			#two.wrapper .timeline-item.left .meta,
+			#two.wrapper .timeline-item.right .meta{ display:flex; flex-direction:row; align-items:center; justify-content:flex-start; gap:0; }
+			#two.wrapper .timeline-item .time,
+			#two.wrapper .timeline-item.left .time,
+			#two.wrapper .timeline-item.right .time{ min-width:3.6rem; font-size:0.8rem; font-weight:400; text-align:left; flex:0 0 auto; display:flex; flex-direction:column; justify-content:center; margin-left:12px; }
+			#two.wrapper .timeline-item .time span{ display:block; line-height:1.2; }
+			#two.wrapper .timeline-item .time + .card{ margin-left:15px; }
+			#two.wrapper .timeline-item .card{ display:flex; justify-content:center; align-items:center; text-align:center; width:200px; min-width:200px; max-width:200px; padding:0.5rem 1rem; background:rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.06); box-shadow:none; flex:0 0 auto; }
+			#two.wrapper .timeline-item .card h3{ width:100%; text-align:center; letter-spacing:0.225em; text-transform:uppercase; }
+			#two.wrapper .timeline-item .icon{ left:24px; top:50%; transform:translate(-50%, -50%); width:34px; height:34px; background:#ffffff; border-radius:50%; box-shadow:0 0 0 1px #e0e0e0; }
+			#two.wrapper .timeline-item .icon svg{ width:22px; height:22px; }
+			#two.wrapper .program-disclaimer{ margin:40px auto 0; padding:0 1rem; }
+		}
+
+		@media (min-width:1281px){
+			#two.wrapper{ --axis-gap: 50px; }
+			#two.wrapper .timeline{ padding:2rem 0; }
+			#two.wrapper .timeline::before{ left:50%; transform:translateX(-50%); }
+			#two.wrapper .timeline-item{ width:100%; padding:1rem 0; margin-bottom:20px; }
+			#two.wrapper .timeline-item.left, #two.wrapper .timeline-item.right{ left:auto; text-align:left; flex-direction:row; }
+			#two.wrapper .timeline-item::before, #two.wrapper .timeline-item::after{ display:none !important; }
+			#two.wrapper .timeline-item .meta{ display:flex; align-items:center; gap:18px; }
+			#two.wrapper .timeline-item .time{ min-width:3.75rem; font-size:0.85rem; font-weight:400; color:#555555; }
+			#two.wrapper .timeline-item .card{ display:inline-block; width:fit-content; max-width:400px; padding:0.5rem 1rem; background:rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.05); box-shadow:none; }
+			#two.wrapper .timeline-item .icon{ position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:34px; height:34px; background:#ffffff; border-radius:50%; box-shadow:0 0 0 1px #e0e0e0; }
+			#two.wrapper .timeline-item .icon svg{ width:22px; height:22px; }
+			#two.wrapper .timeline-item:nth-child(odd) .meta{ margin-left:50%; padding-left:var(--axis-gap); width:calc(50% - var(--axis-gap)); flex-direction:row; justify-content:flex-start; }
+			#two.wrapper .timeline-item:nth-child(even) .meta{ margin-right:50%; padding-right:var(--axis-gap); width:calc(50% - var(--axis-gap)); flex-direction:row; justify-content:flex-end; }
+			#two.wrapper .timeline-item:nth-child(even) .time{ order:2; }
+			#two.wrapper .timeline-item:nth-child(even) .card{ order:1; }
+			#two.wrapper .timeline-item:nth-child(even) .time,
+			#two.wrapper .timeline-item:nth-child(even) .card{ text-align:right; }
+		}
+
+		/* Location Section Styles */
+		:root{ --loc-text: #222222; --loc-bg: #ffffff; --loc-accent: #8aa7b8; }
+		#location.wrapper{ padding:4rem 0; }
+		#location.wrapper{
+			background-color: #2e3842;
+		}
+		.location-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:stretch; }
+		.location-text{ display:flex; flex-direction:column; justify-content:flex-start; }
+		.location-text h2{ font-size:2.2rem; margin-bottom:1.5rem; color:var(--loc-accent); }
+		.location-place{ font-size:1.3rem; font-weight:600; color:#666; margin-bottom:0.5rem; }
+		.location-address{ font-size:0.95rem; color:#666; line-height:1.6; margin-bottom:1.5rem; }
+		.location-btn{ display:inline-block; padding:0.75rem 1.5rem; background:var(--loc-accent); color:#fff; text-decoration:none; border-radius:4px; font-weight:600; transition:background .2s ease; }
+		.location-btn:hover{ background:#7a96a8; }
+		.location-map{ border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.1); overflow:hidden; }
+		.location-map iframe{ width:100%; height:450px; border:none; display:block; }
+		@media (max-width:900px){
+			.location-grid{ grid-template-columns:1fr; gap:2rem; }
+			.location-text h2{ font-size:1.8rem; }
+			.location-map iframe{ height:350px; }
+		}
+		@media (max-width:480px){
+			#location.wrapper{ padding:2rem 0; }
+			.location-text h2{ font-size:1.5rem; margin-bottom:1rem; }
+			.location-map iframe{ height:280px; }
+		}
+
+		/* Footer background image visible on all screen sizes */
+		#footer{
+			background-image: -moz-linear-gradient(top, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("images/od_fotografa.jpg");
+			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("images/od_fotografa.jpg");
+			background-image: -ms-linear-gradient(top, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("images/od_fotografa.jpg");
+			background-image: linear-gradient(top, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("images/od_fotografa.jpg");
+			background-color: #1d242a;
+			background-position: center 30%;
+			background-repeat: no-repeat;
+			background-size: cover;
+				min-height:100vh;
+			padding:0 0 2.5rem 0;
+			display:flex;
+			flex-direction:column;
+			justify-content:flex-end;
+			align-items:center;
+			box-sizing:border-box;
+		}
+
+		/* Information Section Styles */
+		:root{ --info-text: #222222; --info-accent: #8aa7b8; --info-bg: #ffffff; }
+		#three.wrapper{ background:var(--info-bg); padding:4rem 0; }
+		#three .inner > h2{ font-size:1.35em; margin:0 auto 3.5em auto; display:table; text-align:center; color:var(--info-text); font-weight:800; border-bottom:solid 2px #B4C5CF; padding-bottom:0.4em; position:relative; letter-spacing:0.225em; text-transform:uppercase; }
+		#three .inner > h2:after{ content:""; display:block; height:1px; }
+			.info-grid{ display:grid; grid-template-columns:1fr; gap:3rem; }
+			.info-item{ box-sizing:border-box; padding:2rem; background:#f9f9f9; border-radius:8px; }
+		.info-item h3{ font-size:1.3rem; color:var(--info-accent); margin-bottom:1rem; font-weight:600; }
+		.info-item p{ color:var(--info-text); line-height:1.7; margin-bottom:1rem; font-size:0.95rem; }
+		.contact-list li{ color:var(--info-accent); }
+		.gift-qr-container{ margin-top:30px; text-align:center; }
+		.gift-qr-container img{ width:100%; max-width:180px; height:auto; border-radius:8px; }
+		.color-swatches{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem; justify-content:center; }
+		.color-swatch{ width:60px; height:60px; border-radius:50%; border:2px solid #ddd; box-shadow:0 4px 8px rgba(0,0,0,0.08); transition:transform .2s ease; cursor:pointer; }
+		.color-swatch:hover{ transform:scale(1.1); }
+		@media (max-width:900px){
+			.info-grid{ grid-template-columns:1fr; gap:2rem; }
+			#three .inner > h2{ font-size:2rem; }
+		}
+		@media (max-width:480px){
+			#three.wrapper{ padding:2rem 0; }
+			.info-item{ padding:1.5rem; }
+			.info-item h3{ font-size:1.1rem; }
+			#two.wrapper header.major h2{ margin:0 auto 2.5em auto; }
+		}
+
+/* Memory Game styles */
+:root{
+	--memory-back: #B4C5CF; /* light blue-gray accent */
+	--memory-front: #ffffff;
+	--memory-accent: #E9C6C2;
+	--memory-success: #8FD3B5;
+}
+
+.weather-item{ color:var(--info-text); }
+.info-item .weather-grid{ display:flex; gap:2rem; align-items:flex-start; }
+.info-item .weather-col{ flex:1; min-width:220px; box-sizing:border-box; }
+.weather-icon{ width:64px; height:64px; display:block; }
+.weather-temp{ font-size:1.6rem; font-weight:700; color:var(--info-text); }
+.weather-desc{ font-size:0.95rem; color:var(--info-text); }
+.weather-meta{ display:flex; gap:0.75rem; align-items:center; font-size:0.85rem; color:#666; flex-wrap:wrap; margin-top:0.75rem; }
+.weather-badge{ font-size:0.78rem; padding:4px 8px; border-radius:999px; background:transparent; color:#666; border:1px solid rgba(0,0,0,0.04); margin-top:0.75rem; display:inline-block; }
+.weather-actions{ margin-left:auto; }
+		#weather-refresh.button{ color:#B4C5CF; box-shadow: inset 0 0 0 2px #B4C5CF; }
+.current-live{ font-size:0.9rem; color:#d9534f; display:flex; align-items:center; gap:8px; margin-top:6px; }
+.live-dot{ width:10px; height:10px; background:#d9534f; border-radius:50%; display:inline-block; box-shadow:0 0 6px rgba(217,83,79,0.6); }
+@media (max-width:700px){ .info-item .weather-grid{ flex-direction:column; } .weather-icon{ width:56px; height:56px; } .weather-temp{ font-size:1.25rem; } }
+
+.memory-section.wrapper{ background:#ffffff; padding:2.5rem 0; }
+#memory.wrapper h2{ color:var(--info-text); }
+#memory.wrapper header.major h2, #memory.wrapper header.major h3, #memory.wrapper header.major h4, #memory.wrapper header.major h5, #memory.wrapper header.major h6{ border-bottom-color:#B4C5CF; }
+#memory.wrapper header.major p{ color:var(--info-text); }
+.memory-inner{ max-width:1100px; margin:0 auto; }
+.memory-grid{ display:grid; gap:12px; grid-template-columns:repeat(var(--cols,3), 1fr); justify-items:center; }
+@media (min-width:600px){ .memory-grid{ --cols:4; } }
+@media (min-width:1000px){ .memory-grid{ --cols:6; } }
+.memory-grid .card{ width:100%; max-width:150px; aspect-ratio:1 / 1; perspective:1000px; }
+.card-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .6s; cursor:pointer; }
+.card.flipped .card-inner{ transform:rotateY(180deg); }
+.card-face{ position:absolute; inset:0; backface-visibility:hidden; display:flex; align-items:center; justify-content:center; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.08); overflow:hidden; }
+.card-back{ background:var(--memory-back); color:var(--info-text); font-size:1.6rem; }
+.card-front{ background:var(--memory-front); transform:rotateY(180deg); }
+.card-front img{ width:100%; height:100%; object-fit:cover; display:block; }
+.card.matched .card-face{ box-shadow:0 0 0 6px rgba(143,211,181,0.18); }
+.memory-overlay{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.5); z-index:12000; }
+.memory-overlay.show{ display:flex; }
+.memory-overlay .message{ background:#fff; padding:1.5rem 2rem; border-radius:8px; text-align:center; font-size:1.2rem; color:#222; box-shadow:0 12px 40px rgba(0,0,0,0.2); }
+
+		</style>
+	</head>
+	<body class="landing is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">Svatba K&D</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="#banner">HOME</a></li>
+											<li><a href="#one">ZVEME VÁS NA NAŠI SVATBU</a></li>
+											<li><a href="#two">PROGRAM SVATBY</a></li>
+											<li><a href="#three">ABY VÁM NIC NEUNIKLO</a></li>
+											<li><a href="#location">MÍSTO KONÁNÍ</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<h2>Karolína & David</h2>
+							<p>Budeme se brát!<br />
+							Podlešanský Mlýn <br />
+							1.8.2026 12:00</p>
+							<ul class="actions special">
+								<li><a href="#one" class="button primary scrolly">Těšíme se na Vás!</a></li>
+							</ul>
+						</div>
+						<a href="#one" class="more scrolly"></a>
+					</section>
+
+				<!-- One -->
+					<!-- Countdown -->
+					<section id="countdown" class="wrapper">
+						<div class="inner">
+							<header class="major">
+								<h2>Své "ANO" si řekneme za</h2>
+							</header>
+							<div class="countdown-section">
+								<div class="countdown-grid" aria-live="polite" aria-atomic="true">
+									<div class="countdown-item">
+										<div class="countdown-number" id="days">0</div>
+										<div class="countdown-label">Dnů</div>
+									</div>
+									<div class="countdown-item">
+										<div class="countdown-number" id="hours">00</div>
+										<div class="countdown-label">Hodin</div>
+									</div>
+									<div class="countdown-item">
+										<div class="countdown-number" id="minutes">00</div>
+										<div class="countdown-label">Minut</div>
+									</div>
+									<div class="countdown-item">
+										<div class="countdown-number" id="seconds">00</div>
+										<div class="countdown-label">Sekund</div>
+									</div>
+								</div>
+								<div id="countdown-message" class="countdown-message" style="display:none;"></div>
+							</div>
+						</div>
+					</section>
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<div style="text-align:center;">
+								<div class="major">
+									<h2>Zveme Vás na naši svatbu!</h2>
+								</div>
+								<div class="invite-wrapper">
+									<img id="invite-img" src="images/pozvanka_a6.jpg" alt="Pozvánka" style="max-width:480px;width:60%;height:auto;display:inline-block;" />
+								</div>
+								<!-- Modal / Lightbox -->
+								<div id="invite-modal" class="invite-modal" role="dialog" aria-modal="true" aria-hidden="true">
+									<button class="invite-close" aria-label="Zavřít">×</button>
+									<img id="invite-modal-img" src="" alt="Pozvánka" />
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- Two: Wedding Itinerary Timeline -->
+					<section id="two" class="wrapper alt style2">
+						<div class="inner">
+							<header class="major">
+								<h2>Program svatby</h2>
+								<!-- <p>Průběh dne (ukázkový plán)</p> -->
+							</header>
+							<div class="timeline" role="list">
+								<!-- Item 1 -->
+								<article class="timeline-item left" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- simple guest icon (people) -->
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM8 11c1.657 0 3-1.343 3-3S9.657 5 8 5 5 6.343 5 8s1.343 3 3 3zM8 13c-2.67 0-8 1.337-8 4v2h16v-2c0-2.663-5.33-4-8-4zM16 13c-.29 0-.62.02-.97.06 1.16.84 1.97 1.96 1.97 3.44v2h6v-2c0-2.663-5.33-4-8-4z" fill="var(--tl-primary)"/></svg>
+										</div>
+										<div class="time"><span>10:00</span><br /><span>11:00</span></div>
+										<div class="card">
+											<h3>Příjezd hostů</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 2 -->
+								<article class="timeline-item right" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- ring icon -->
+											<!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.09 4.26L18.7 7l-3.35 2.44L15.5 14 12 11.82 8.5 14l.15-4.56L5.3 7l4.61-.74L12 2z" fill="var(--tl-primary)"/></svg> -->
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 110 10 5 5 0 010-10zm0-9L8 6h8l-4-4z" fill="var(--tl-primary)"/></svg>
+										</div>	
+										
+										<div class="time">12:00</div>
+										<div class="card">
+											<h3>Svatební obřad</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 3 -->
+								<article class="timeline-item left" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- camera icon -->
+											<!-- <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm8-2h-2.586l-1.707-1.707A.996.996 0 0015.586 4H8.414c-.265 0-.52.105-.707.293L6 6H4a2 2 0 00-2 2v8a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2z" fill="var(--tl-primary)"/></svg> -->
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 5a2 2 0 00-2 2v12a2 2 0 00 2 2h16a2 2 0 00 2-2V7a2 2 0 00-2-2h-3l-2-3H9L7 5H4zm8 12a4 4 0 110-8 4 4 0 010 8zm0-2a2 2 0 100-4 2 2 0 000 4z" fill="var(--tl-primary)"/></svg>
+										</div>
+										<div class="time">12:30</div>
+										<div class="card">
+											<h3>Společné focení</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 4 -->
+								<article class="timeline-item right" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- cutlery icon -->
+											<!-- <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2v12a3 3 0 01-6 0V2h6zm9 0v12a3 3 0 006 0V2h-6zM13 5h2v14h-2z" fill="var(--tl-primary)"/></svg> -->
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tl-primary)" xmlns="http://www.w3.org/2000/svg">
+  												<path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.88 3.75 3.99V22h2.5v-9.01C11.34 12.88 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
+											</svg>
+										</div>
+										<div class="time">13:30</div>
+										<div class="card">
+											<h3>Slavnostní hostina</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 5 -->
+								<article class="timeline-item left" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- cake icon -->
+											<!-- <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2s2 1.5 2 3c0 1.5-2 2-2 2s-2-.5-2-2c0-1.5 2-3 2-3zm8 8v8H4v-8c0-2.21 1.79-4 4-4h8c2.21 0 4 1.79 4 4z" fill="var(--tl-primary)"/></svg> -->
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 0 0-2 2v8h16zm-3-13v3h-2V8h2zm-4 0v3h-2V8h2zm-4 0v3H7V8h2zm3-5a1 1 0 110 2 1 1 0 010-2z" fill="var(--tl-primary)"/></svg>
+										</div>
+										<div class="time">15:30</div>
+										<div class="card">
+											<h3>Krájení dortu</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 6 -->
+								<article class="timeline-item right" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- flower icon -->
+											<!-- <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a5 5 0 00-5 5c0 1.8.97 3.37 2.41 4.24L7 15h3v7h4v-7h3l-2.41-3.76A4.98 4.98 0 0017 7a5 5 0 00-5-5z" fill="var(--tl-primary)"/></svg> -->
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--tl-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+  												<circle cx="12" cy="12" r="3"></circle>
+  												<path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5"></path>
+											</svg>
+										</div>
+										<div class="time">18:30</div>
+										<div class="card">
+											<h3>"HÁZENÍ" KYTICE</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 7 -->
+								<article class="timeline-item left" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- music icon -->
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z" fill="var(--tl-primary)"/></svg>
+										</div>
+										<div class="time">19:00</div>
+										<div class="card">
+											<h3>PRVNÍ TANEC</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 8 -->
+								<article class="timeline-item right" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- sparkler/star icon -->
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2zm7 11l.95 2.55L22.5 16l-2.55.95L19 19.5l-.95-2.55L15.5 16l2.55-.95L19 13zm-14 1l.75 2.05L7.8 17l-2.05.75L5 19.8l-.75-2.05L2.2 17l2.05-.75L5 14z" fill="var(--tl-primary)"/></svg>
+										</div>
+										<div class="time">20:30</div>
+										<div class="card">
+											<h3>PRSKAVKY</h3>
+										</div>
+									</div>
+								</article>
+
+								<!-- Item 9 -->
+								<article class="timeline-item left" role="listitem">
+									<div class="meta">
+										<div class="icon" aria-hidden="true">
+											<!-- party glass icon -->
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v2l-7 7v6l2 2v1H8v-1l2-2v-6L3 5V3z" fill="var(--tl-primary)"/></svg>
+										</div>
+										<div class="time">21:00</div>
+										<div class="card">
+											<h3>VOLNÁ ZÁBAVA</h3>
+										</div>
+									</div>
+								</article>
+							</div>
+								<p class="program-disclaimer">* Vyhrazujeme si právo na drobné aktualizace programu v reálném čase. Plán je sice jasný, ale realita bude pravděpodobně ještě lepší a my chceme, aby náš den plynul hlavně podle aktuální atmosféry.</p>
+						</div>
+					</section>
+
+<!-- Three: Additional Information -->
+				<section id="three" class="wrapper">
+					<div class="inner">
+						<h2>Aby vám nic neuniklo</h2>
+						<div class="info-grid">
+							<!-- Dresscode -->
+							<div class="info-item">
+								<h3>Co na sebe?</h3>
+								<p>Netrapte se s přísným smokingem, ale nechte prosím džíny doma. Budeme se na vás těšit v Semi-formal outfitu – sako, košile, šaty nebo stylový overal budou značka ideál.</p>
+								<p>Jedinou prosbu máme k barvám: bílou si prosím šetřete pro nevěstu. Pokud se navíc trefíte do barev naší svatby (viz kolečka níže), budeme naprosto nadšení, jak nám to spolu bude ladit!</p>
+								<div class="color-swatches">
+									<div class="color-swatch" style="background:#B4C5CF;"></div>
+									<div class="color-swatch" style="background:#B8C2B9;"></div>
+									<div class="color-swatch" style="background:#8CA296;"></div>
+									<div class="color-swatch" style="background:#7D8B7C;"></div>
+									<div class="color-swatch" style="background:#FFD3BE;"></div>
+									<div class="color-swatch" style="background:#E9A485;"></div>
+									<div class="color-swatch" style="background:#E9C6C2;"></div>
+									<div class="color-swatch" style="background:#D0A29F;"></div>
+								</div>
+							</div>
+
+							<!-- Příjezd -->
+							<div class="info-item">
+								<h3>Příjezd</h3>
+								<p>Prosíme o příjezd mezi 10:00 a 11:00. Budete tak mít dostatek času se v klidu ubytovat, přivítat se s ženichem a společně se naladit na obřad v příjemné atmosféře.</p>
+							</div>
+
+							<!-- Parkování -->
+							<div class="info-item">
+								<h3>Parkování</h3>
+								<p>O své plechové miláčky se nemusíte bát. Přímo v areálu Podlešanského mlýna je k dispozici dostatek parkovacích míst pro všechny hosty. Autem se dostanete pohodlně až k místu konání, takže vás nečekají žádné dlouhé pěší přesuny.</p>
+							</div>
+
+							<!-- Ubytování -->
+							<div class="info-item">
+								<h3>Ubytování</h3>
+								<p>Pro hosty, se kterými jsme na ubytování domluveni, je zajištěn nocleh ve stylové dřevostavbě v místě konání. Čekají na vás luxusní a útulné čtyřlůžkové pokoje, kde načerpáte síly po protancované noci. Pokud byste potřebovali vědět cokoli dalšího k rozdělení pokojů, dejte nám vědět.</p>
+							</div>
+
+							<!-- Kontakty -->
+							<div class="info-item">
+								<h3>Kontakty</h3>
+								<p>Máte nějaký dotaz nebo nám chcete jen něco vzkázat? Jsme vám k dispozici na telefonu:</p>
+								<ul class="contact-list">
+									<li>David: +420 605 958 839</li>
+									<li>Kája: +420 739 645 296</li>
+								</ul>
+								<p>Moc vás prosíme: Pokud máte jakékoli potravinové intolerance, alergie nebo jiná specifická přání ohledně jídla, dejte nám vědět co nejdříve, abychom pro vás mohli v kuchyni zajistit to nejlepší.</p>
+								<p>V den svatby se prosím s akutními dotazy obracejte na naše svědky:</p>
+								<ul class="contact-list">
+									<li>Terka: +420 604 486 750</li>
+									<li>Ota: +420 731 735 117</li>
+								</ul>
+							</div>
+
+							<!-- Finanční dary -->
+							<div class="info-item">
+								<h3>Svatební dary</h3>
+								<p>Největším darem pro nás bude vaše přítomnost a to, že tento den oslavíte s námi. Pokud byste nás však chtěli obdarovat, budeme vděčni za jakýkoliv finanční příspěvek na naše společné začátky a budování domova.</p>
+								<p>Dar nám můžete předat buď v tradiční obálce na místě, nebo pro větší pohodlí využít připravený QR kód níže. Děkujeme!</p>
+								<div class="gift-qr-container">
+									<img src="images/qr_code.jpg">
+								</div>
+							</div>
+
+							<!-- Fotogalerie -->
+							<div class="info-item">
+								<h3>Fotogalerie</h3>
+								<p>Zde naleznete odkaz na google album, kam můžete nahrávat své fotografie z naší svatby:</p>
+								<a href="https://photos.app.goo.gl/JcFuF7MpCh1QUd586" target="_blank" rel="noopener" class="location-btn">Otevřít Fotogalerii</a>
+							</div>
+
+							<!-- Weather Forecast: two-column layout (current + forecast) -->
+							<div id="weather" class="info-item weather-item" aria-labelledby="weather-title" role="region">
+								<div class="weather-grid">
+									<!-- Left: Current -->
+									<div class="weather-col weather-current">
+										<h3>Aktuálně v Mlýně</h3>
+										<div class="current-row" style="display:flex;gap:12px;align-items:center;">
+											<svg id="current-svg" class="weather-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+											<div>
+												<div class="weather-temp" id="current-temp">—°C</div>
+												<div class="weather-desc" id="current-desc">—</div>
+												<div class="current-live"><span class="live-dot" aria-hidden="true"></span>Právě teď</div>
+											</div>
+										</div>
+										<div id="current-updated" class="weather-updated">Aktualizováno: —</div>
+									</div>
+						
+									<!-- Right: Forecast / Wedding day -->
+									<div class="weather-col weather-forecast">
+										<h3>Předpověď na náš den</h3>
+										<div class="forecast-row" style="display:flex;gap:12px;align-items:center;">
+											<svg id="forecast-svg" class="weather-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+											<div>
+												<div class="weather-temp" id="weather-temp">—°C</div>
+												<div class="weather-desc" id="weather-desc">Načítání…</div>
+											</div>
+										</div>
+										<div class="weather-meta">
+											<div id="weather-updated">Aktualizováno: —</div>
+											<div class="weather-actions"><button id="weather-refresh" class="button small">Aktualizovat</button></div>
+										</div>
+										<div class="weather-badge">Agregovaná data z modelů ECMWF, GFS a ICON</div>
+									</div>
+								</div>
+							</div>
+			
+						</div>
+						</div>
+
+
+					</section>
+
+					<!-- Memory / Pexeso Game -->
+					<section id="memory" class="wrapper memory-section">
+						<div class="inner memory-inner">
+							<header class="major">
+								<h2>Pexeso</h2>
+								<p>Najděte nás na Novém Zélandu na všech 6 párech — klikněte na dvě karty pro porovnání.</p>
+							</header>
+							<div class="memory-grid" id="memory-grid" aria-live="polite"></div>
+							<div class="memory-controls" style="margin-top:1rem;text-align:center;">
+								<button id="memory-restart" class="button">Restartovat hru</button>
+							</div>
+						</div>
+						<div class="memory-overlay" id="memory-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+							<div class="message">
+								<div id="memory-message">Skvělá práce! Těšíme se na vás.</div>
+								<div style="margin-top:0.75rem;"><button id="memory-close" class="button primary">Zavřít / Hrát znovu</button></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Location -->
+					<section id="location" class="wrapper">
+						<div class="inner">
+							<div class="location-grid">
+								<!-- Left Column: Text Content -->
+								<div class="location-text">
+									<h2>Místo konání</h2>
+									<div class="location-place">Podlešanský mlýn</div>
+									<div class="location-address">Lešany 29<br />257 44 Lešany</div>
+									<a href="https://www.google.com/maps/search/Podlešanský+mlýn+Lešany+29+257+44+Lešany" target="_blank" rel="noopener" class="location-btn">Navigovat (Google Maps)</a>
+								</div>
+								<!-- Right Column: Map -->
+								<div class="location-map">
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2572.501477696487!2d14.531775076366518!3d49.85182397148413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b85c817d370ef%3A0x83d98ee47a656caf!2zUG9kbGXFoWFuc2vDvSBtbMO9bg!5e0!3m2!1scs!2scz!4v1770567539877!5m2!1scs!2scz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- CTA -->
+					<!-- <section id="cta" class="wrapper style4">
+						<div class="inner">
+							<header>
+								<h2>Arcue ut vel commodo</h2>
+								<p>Aliquam ut ex ut augue consectetur interdum endrerit imperdiet amet eleifend fringilla.</p>
+							</header>
+							<ul class="actions stacked">
+								<li><a href="#" class="button fit primary">Activate</a></li>
+								<li><a href="#" class="button fit">Learn More</a></li>
+							</ul>
+						</div>
+					</section> -->
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!-- <ul class="icons"> -->
+							<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li> -->
+							<!-- <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li> -->
+						<!-- <ul> class="copyright"> -->
+						<!-- </ul> -->
+						<ul class="copyright">
+							<li>Svatba K&D 2026</li>
+						</ul>
+					</footer>
+
+			</div>
+			
+		<!-- Scripts -->
+		<script>
+		// Invite image lightbox: open full-screen on click, close with X/Escape/background
+		(function(){
+			function qs(id){return document.getElementById(id);}
+			var img = qs('invite-img');
+			var modal = qs('invite-modal');
+			var modalImg = qs('invite-modal-img');
+			var closeBtn;
+			document.addEventListener('DOMContentLoaded', function(){
+				if(!img || !modal || !modalImg) return;
+				closeBtn = modal.querySelector('.invite-close');
+				// make image keyboard-accessible and indicate it's interactive
+				img.setAttribute('tabindex','0');
+				img.setAttribute('role','button');
+				img.addEventListener('click', function(){
+					modalImg.src = img.src;
+					modal.style.display = 'flex';
+					modal.setAttribute('aria-hidden','false');
+					document.body.classList.add('modal-open');
+				});
+				// allow Enter or Space to open the modal
+				img.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); img.click(); } });
+				// Close handlers
+				closeBtn.addEventListener('click', closeModal);
+				modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+				document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+				function closeModal(){
+					modal.style.display = 'none';
+					modal.setAttribute('aria-hidden','true');
+					document.body.classList.remove('modal-open');
+					modalImg.src = '';
+				}
+			});
+		})();
+		</script>
+		<script>
+		// Weather Forecast component (Open-Meteo integration) - two-column layout with current + forecast
+		(function(){
+			const LAT = 49.8447, LON = 14.5315;
+			const WEDDING_DATE = new Date('2026-08-01T12:00:00');
+			const LOCATION_LABEL = 'Lešany, ČR';
+			const HIST_YEARS = [2020,2021,2022,2023,2024];
+
+			// DOM refs for current weather (left column)
+			const currentTempEl = () => document.getElementById('current-temp');
+			const currentDescEl = () => document.getElementById('current-desc');
+			const currentSvgEl = () => document.getElementById('current-svg');
+			const currentUpdatedEl = () => document.getElementById('current-updated');
+
+			// DOM refs for wedding forecast (right column)
+			const tempEl = () => document.getElementById('weather-temp');
+			const descEl = () => document.getElementById('weather-desc');
+			const forecastSvgEl = () => document.getElementById('forecast-svg');
+			const updatedEl = () => document.getElementById('weather-updated');
+			const refreshBtn = () => document.getElementById('weather-refresh');
+
+			const weatherMap = {
+				0: ['Jasno','sun'], 1: ['Částečně oblačno','partly-sunny'], 2: ['Oblačno','cloudy'], 3: ['Zataženo','cloudy'],
+				45: ['Mlha','cloudy'], 48: ['Mlha (s ledem)','cloudy'], 51: ['Drobné mrholení','rain'], 53: ['Mrholení','rain'],
+				55: ['Silné mrholení','rain'], 61: ['Déšť','rain'], 63: ['Silný déšť','rain'], 65: ['Velmi silný déšť','rain'],
+				80: ['Přeháňky','rain'], 95: ['Bouřky','rain'], 106: ['Sněžení','snow']
+			};
+
+			function renderIcon(svgEl, key){
+				if(!svgEl) return;
+				svgEl.innerHTML = '';
+				if(key === 'sun') svgEl.innerHTML = '<circle cx="32" cy="32" r="12" fill="#FFD166"/>';
+				else if(key === 'partly-sunny') svgEl.innerHTML = '<g><circle cx="22" cy="22" r="8" fill="#FFD166"/><path d="M10 40c6-12 28-12 36-2 2-8-6-18-16-18-6 0-10 4-14 6-6 4-10 14-6 14z" fill="#E6E6E6"/></g>';
+				else if(key === 'cloudy') svgEl.innerHTML = '<path d="M20 42h32a8 8 0 0 0 0-16 12 12 0 0 0-22-4 10 10 0 0 0-10 8 6 6 0 0 0 0 12z" fill="#E6E6E6"/>';
+				else if(key === 'rain') svgEl.innerHTML = '<path d="M18 34c-2-6 2-14 10-14 6 0 10 4 12 8a8 8 0 0 1 6 8H18z" fill="#E6E6E6"/><g fill="#6EC6FF"><path d="M24 46l-2 6 4-2 2-6z"/><path d="M34 46l-2 6 4-2 2-6z"/><path d="M44 46l-2 6 4-2 2-6z"/></g>';
+				else if(key === 'snow') svgEl.innerHTML = '<path d="M20 34c-2-6 2-14 10-14 6 0 10 4 12 8a8 8 0 0 1 6 8H20z" fill="#E6E6E6"/><g fill="#FFFFFF"><circle cx="28" cy="46" r="2"/><circle cx="36" cy="46" r="2"/><circle cx="44" cy="46" r="2"/></g>';
+				else svgEl.innerHTML = '<circle cx="32" cy="32" r="12" fill="#FFD166"/>';
+			}
+
+			function formatTS(d){ return d.toLocaleString('cs-CZ', { dateStyle:'short', timeStyle:'short' }); }
+
+			// Fetch current weather via Open-Meteo Forecast API
+			async function fetchCurrentWeather(){
+				try{
+					const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=weather_code,temperature_2m&timezone=Europe%2FPrague`;
+					const res = await fetch(url);
+					if(!res.ok) throw new Error('Network');
+					const data = await res.json();
+					const current = data.current;
+					const code = current.weather_code;
+					const map = weatherMap[code] || ['—','partly-sunny'];
+					const temp = Math.round(current.temperature_2m);
+					if(currentTempEl()) currentTempEl().textContent = temp + '°C';
+					if(currentDescEl()) currentDescEl().textContent = map[0];
+					renderIcon(currentSvgEl(), map[1]);
+					if(currentUpdatedEl()) currentUpdatedEl().textContent = `Aktualizováno: ${formatTS(new Date())}`;
+				}catch(err){
+					console.error('Current weather fetch failed:', err);
+					if(currentTempEl()) currentTempEl().textContent = '—°C';
+					if(currentDescEl()) currentDescEl().textContent = 'Chyba';
+				}
+			}
+
+			// Fetch historical max temperatures (Aug 1) for last 5 years and compute average
+			async function fetchHistoricalAvg(){
+				const requests = HIST_YEARS.map(year => {
+					const date = `${year}-08-01`;
+					const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${LAT}&longitude=${LON}&start_date=${date}&end_date=${date}&daily=temperature_2m_max&timezone=Europe%2FPrague`;
+					return fetch(url).then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(json => {
+						const v = json?.daily?.temperature_2m_max?.[0];
+						if(typeof v === 'number') return v; throw new Error('No data for '+date);
+					});
+				});
+				const results = await Promise.allSettled(requests);
+				const values = results.filter(r=>r.status==='fulfilled').map(r=>r.value);
+				if(values.length === 0){ console.error('Historical data fetch failed'); return null; }
+				const avg = values.reduce((a,b)=>a+b,0) / values.length;
+				return avg;
+			}
+
+			// Show historical average for wedding day
+			async function showHistorical(){
+				renderIcon(forecastSvgEl(), 'sun');
+				const avg = await fetchHistoricalAvg();
+				if(avg === null){
+					const fallback = 26;
+					if(tempEl()) tempEl().textContent = `Historický průměr: ${fallback}°C`;
+					if(descEl()) descEl().textContent = 'Zatím zde vidíte odhad, 10 dní před svatbou už je vidět předpověď.';
+					if(updatedEl()) updatedEl().textContent = 'Průměrné hodnoty pro srpen';
+					return;
+				}
+				if(tempEl()) tempEl().textContent = `Historický průměr: ${Math.round(avg)}°C`;
+				if(descEl()) descEl().textContent = 'Na základě historických dat (průměr) — 10 dní před svatbou zobrazíme živou předpověď.';
+				if(updatedEl()) updatedEl().textContent = `Historická data • ${formatTS(new Date())}`;
+			}
+
+			// Fetch live forecast for the wedding day
+			async function fetchForecast(){
+				try{
+					const ymd = dt => dt.toISOString().slice(0,10);
+					const start = new Date(WEDDING_DATE); const end = new Date(WEDDING_DATE);
+					const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe%2FPrague&start_date=${ymd(start)}&end_date=${ymd(end)}`;
+					const res = await fetch(url);
+					if(!res.ok) throw new Error('Network');
+					const data = await res.json();
+					const dayIdx = 0;
+					const tempMax = data.daily.temperature_2m_max[dayIdx];
+					const tempMin = data.daily.temperature_2m_min[dayIdx];
+					const code = data.daily.weathercode[dayIdx];
+					const map = weatherMap[code] || ['Neurčeno','partly-sunny'];
+					if(tempEl()) tempEl().textContent = `${Math.round((tempMax+tempMin)/2)}°C ( ${Math.round(tempMin)}–${Math.round(tempMax)}°C )`;
+					if(descEl()) descEl().textContent = `${map[0]} — ${LOCATION_LABEL}`;
+					renderIcon(forecastSvgEl(), map[1]);
+					if(updatedEl()) updatedEl().textContent = 'Live • ' + formatTS(new Date());
+				}catch(err){
+					console.error('Live forecast failed, falling back to historical:', err);
+					await showHistorical();
+				}
+			}
+
+			// Initialization: fetch current + decide forecast strategy
+			document.addEventListener('DOMContentLoaded', async function(){
+				fetchCurrentWeather();
+				const today = new Date();
+				const diffDays = Math.ceil((WEDDING_DATE - today) / (1000*60*60*24));
+				const FORECAST_THRESHOLD_DAYS = 10;
+				if(diffDays < FORECAST_THRESHOLD_DAYS && diffDays >= 0){
+					if(descEl()) descEl().textContent = 'Načítání předpovědi…';
+					fetchForecast();
+				}else{
+					showHistorical();
+				}
+				if(refreshBtn()) refreshBtn().addEventListener('click', function(){ fetchCurrentWeather(); if(descEl()) descEl().textContent = 'Načítání předpovědi…'; fetchForecast(); });
+			});
+		})();
+		</script>
+			<script>
+			// Countdown to target date (Czech labels)
+			// Keeps logic simple and handles finished state gracefully.
+			(function(){
+			const target = new Date('2026-08-01T12:00:00'); // Target: 1.8.2026 12:00
+			const ids = ['days','hours','minutes','seconds'];
+			const els = ids.reduce((acc,id)=>{ acc[id]=document.getElementById(id); return acc; },{});
+			const msgEl = document.getElementById('countdown-message');
+			function updateCountdown(){
+				const now = new Date();
+				let diff = target - now; // ms
+				if(diff <= 0){
+					// Finished: clear values and show message
+					setValues(0,0,0,0);
+					if(msgEl){ msgEl.style.display='block'; msgEl.textContent='Svatební den je tady!'; }
+					return false; // signal finished
+				}
+				const seconds = Math.floor(diff/1000);
+				const d = Math.floor(seconds / (3600*24));
+				const h = Math.floor((seconds % (3600*24)) / 3600);
+				const m = Math.floor((seconds % 3600) / 60);
+				const s = seconds % 60;
+				setValues(d,h,m,s);
+				return true;
+			}
+			function setValues(d,h,m,s){
+				if(els.days) els.days.textContent = d;
+				if(els.hours) els.hours.textContent = String(h).padStart(2,'0');
+				if(els.minutes) els.minutes.textContent = String(m).padStart(2,'0');
+				if(els.seconds) els.seconds.textContent = String(s).padStart(2,'0');
+			}
+			// Start interval after DOM is ready
+			document.addEventListener('DOMContentLoaded', function(){
+				// Initial update
+				if(!updateCountdown()) return;
+				const interval = setInterval(function(){ if(!updateCountdown()) clearInterval(interval); }, 1000);
+			});
+		})();
+		</script>
+		<script>
+		// Memory / Pexeso game script
+		(function(){
+			const images = [
+				'images/IMG_0948.JPG',
+				'images/IMG_0974.JPG',
+				'images/IMG_1991.JPG',
+				'images/IMG_2338.JPG',
+				'images/IMG_7098.JPG',
+				'images/IMG_7239.JPG'
+			];
+			let pairs = [];
+			let firstCard = null, secondCard = null, lock = false, matches = 0;
+			const overlay = () => document.getElementById('memory-overlay');
+			const messageEl = () => document.getElementById('memory-message');
+
+			function shuffle(arr){
+				for(let i=arr.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+				return arr;
+			}
+
+			function buildBoard(){
+				pairs = images.concat(images);
+				shuffle(pairs);
+				const grid = document.getElementById('memory-grid');
+				grid.innerHTML = '';
+				matches = 0; firstCard = null; secondCard = null; lock = false;
+				pairs.forEach((src, i)=>{
+					const card = document.createElement('div');
+					card.className = 'card';
+					card.dataset.img = src;
+					card.setAttribute('tabindex','0');
+
+					const inner = document.createElement('div'); inner.className = 'card-inner';
+
+					const front = document.createElement('div'); front.className = 'card-face card-front';
+					const img = document.createElement('img'); img.src = src; img.alt = 'Foto'; front.appendChild(img);
+
+					const back = document.createElement('div'); back.className = 'card-face card-back';
+					back.innerHTML = '<div style="font-size:1.6rem;line-height:1">❤</div>';
+
+					inner.appendChild(front); inner.appendChild(back); card.appendChild(inner);
+					card.addEventListener('click', onCardClick);
+					card.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); card.click(); } });
+					grid.appendChild(card);
+				});
+			}
+
+			function onCardClick(e){
+				if(lock) return; const card = e.currentTarget; if(card.classList.contains('flipped') || card.classList.contains('matched')) return;
+				card.classList.add('flipped');
+				if(!firstCard){ firstCard = card; return; }
+				secondCard = card; lock = true;
+				if(firstCard.dataset.img === secondCard.dataset.img){
+					firstCard.classList.add('matched'); secondCard.classList.add('matched');
+					matches += 1; firstCard = null; secondCard = null; lock = false;
+					if(matches === images.length) showVictory();
+					return;
+				}
+				setTimeout(()=>{ firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped'); firstCard=null; secondCard=null; lock=false; }, 1000);
+			}
+
+			function showVictory(){
+				const ov = overlay(); ov.classList.add('show'); ov.setAttribute('aria-hidden','false');
+				messageEl().textContent = 'Skvělá práce! Těšíme se na vás.';
+			}
+
+			function hideVictory(){ const ov = overlay(); ov.classList.remove('show'); ov.setAttribute('aria-hidden','true'); }
+
+			document.addEventListener('DOMContentLoaded', function(){
+				buildBoard();
+				const restart = document.getElementById('memory-restart');
+				const close = document.getElementById('memory-close');
+				if(restart) restart.addEventListener('click', function(){ hideVictory(); buildBoard(); });
+				if(close) close.addEventListener('click', function(){ hideVictory(); buildBoard(); });
+				const ov = overlay(); if(ov) ov.addEventListener('click', function(e){ if(e.target === ov) { hideVictory(); buildBoard(); } });
+			});
+		})();
+		</script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
