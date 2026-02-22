@@ -103,6 +103,10 @@
 		#invite-img{ cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
 		#invite-img:hover, #invite-img:focus{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.18); }
 		#invite-img:focus{ outline:none; box-shadow:0 0 0 4px rgba(237,73,51,0.12); }
+		#banner .inner p span{ display:block; white-space:normal; }
+		@media screen and (max-width: 736px){
+			#banner .inner p{ font-size:0.9em; letter-spacing:0.16em; }
+		}
 		#banner .actions .button.primary{ background-color:#B4C5CF !important; color:#2e3842 !important; box-shadow:none !important; }
 		#banner .actions .button.primary:hover{ background-color:#a6b8c3 !important; }
 		#banner .actions .button.primary:active{ background-color:#9badb8 !important; }
@@ -372,9 +376,11 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 					<section id="banner">
 						<div class="inner">
 							<h2>Karolína & David</h2>
-							<p>Budeme se brát!<br />
-							Podlešanský Mlýn <br />
-							1.8.2026 12:00</p>
+							<p>
+								<span>Budeme se brát!</span>
+								<span>Podlešanský Mlýn</span>
+								<span>1.8.2026 12:00</span>
+							</p>
 							<ul class="actions special">
 								<li><a href="#one" class="button primary scrolly">Těšíme se na Vás!</a></li>
 							</ul>
