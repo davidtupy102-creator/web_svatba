@@ -1,14 +1,12 @@
 <!DOCTYPE HTML>
-<!--
-	Spectral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Spectral by HTML5 UP</title>
+		<title>Svatba Karolína &amp; David</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Svatba Karolína a David • 1.8.2026 • Podlešanský Mlýn" />
+		<meta name="author" content="Karolína &amp; David" />
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23B4C5CF' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
@@ -105,6 +103,9 @@
 		#invite-img{ cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
 		#invite-img:hover, #invite-img:focus{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.18); }
 		#invite-img:focus{ outline:none; box-shadow:0 0 0 4px rgba(237,73,51,0.12); }
+		#banner .actions .button.primary{ background-color:#B4C5CF !important; color:#2e3842 !important; box-shadow:none !important; }
+		#banner .actions .button.primary:hover{ background-color:#a6b8c3 !important; }
+		#banner .actions .button.primary:active{ background-color:#9badb8 !important; }
 
 		/* Modal / lightbox for invite image */
 		.invite-modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.9); z-index:10000; padding:1rem; }
@@ -289,9 +290,59 @@
 .memory-overlay.show{ display:flex; }
 .memory-overlay .message{ background:#fff; padding:1.5rem 2rem; border-radius:8px; text-align:center; font-size:1.2rem; color:#222; box-shadow:0 12px 40px rgba(0,0,0,0.2); }
 
+/* Password gate overlay */
+#page-wrapper{ visibility:hidden; }
+body.site-unlocked #page-wrapper{ visibility:visible; }
+#password-overlay{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:#ffffff; z-index:13000; padding:1.25rem; }
+#password-overlay[aria-hidden="true"]{ display:none; }
+.password-overlay-card{ width:100%; max-width:460px; text-align:center; color:#222222; }
+.password-overlay-card h2{ color:#222222; margin:0 0 1rem 0; font-size:1.2em; }
+.password-overlay-card p{ color:#555555; margin:0 0 1.2rem 0; text-transform:none; letter-spacing:0.03em; }
+.password-form{ display:flex; flex-direction:column; gap:0.9rem; }
+.password-form input[type="password"]{ width:100%; height:2.85em; border:2px solid #B4C5CF; border-radius:4px; background:#ffffff; color:#222222; padding:0 0.9em; font-family:inherit; letter-spacing:0.04em; text-transform:none; }
+.password-form input[type="password"]:focus{ outline:none; border-color:#9badb8; box-shadow:0 0 0 3px rgba(180,197,207,0.28); }
+.password-form .button.primary{
+	display:block;
+	width:200px;
+	margin:20px auto 0;
+	padding:12px 40px;
+	font-size:1.2rem !important;
+	font-weight:700 !important;
+	letter-spacing:1px !important;
+	text-align:center;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	background-color:#B4C5CF !important;
+	color:#2e3842 !important;
+	box-shadow:none !important;
+	border:none !important;
+}
+.password-form .button.primary:hover{
+	background-color:#a6b8c3 !important;
+}
+.password-form .button.primary:active{
+	background-color:#9badb8 !important;
+}
+.password-error{ color:#ed4933; min-height:1.2em; margin:0; font-size:0.8rem; letter-spacing:0.04em; text-transform:none; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
 		</style>
 	</head>
 	<body class="landing is-preload">
+
+		<div id="password-overlay" role="dialog" aria-modal="true" aria-hidden="false" aria-labelledby="password-title">
+			<div class="password-overlay-card">
+				<h2 id="password-title">Vítejte na svatebním webu</h2>
+				<p>Zadejte prosím heslo pro vstup k detailům svatby.</p>
+				<form id="password-form" class="password-form" novalidate>
+					<label for="site-password" class="sr-only">Heslo</label>
+					<input id="site-password" type="password" placeholder="Heslo" autocomplete="current-password" required />
+					<button type="submit" class="button primary">VSTOUPIT</button>
+					<p id="password-error" class="password-error" aria-live="polite"></p>
+				</form>
+			</div>
+		</div>
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
@@ -714,6 +765,68 @@
 			</div>
 			
 		<!-- Scripts -->
+		<script>
+		(function(){
+			const ACCESS_STORAGE_KEY = 'svatba-password-access';
+			const SITE_PASSWORD = 'svatba2026';
+
+			document.addEventListener('DOMContentLoaded', function(){
+				const overlay = document.getElementById('password-overlay');
+				const pageWrapper = document.getElementById('page-wrapper');
+				const form = document.getElementById('password-form');
+				const passwordInput = document.getElementById('site-password');
+				const error = document.getElementById('password-error');
+
+				if(!overlay || !pageWrapper || !form || !passwordInput || !error) return;
+
+				function unlockSite(){
+					document.body.classList.add('site-unlocked');
+					pageWrapper.setAttribute('aria-hidden', 'false');
+					if('inert' in pageWrapper) pageWrapper.inert = false;
+					overlay.setAttribute('aria-hidden', 'true');
+				}
+
+				function lockSite(){
+					document.body.classList.remove('site-unlocked');
+					pageWrapper.setAttribute('aria-hidden', 'true');
+					if('inert' in pageWrapper) pageWrapper.inert = true;
+					overlay.setAttribute('aria-hidden', 'false');
+					passwordInput.focus();
+				}
+
+				let hasAccess = false;
+				try {
+					hasAccess = localStorage.getItem(ACCESS_STORAGE_KEY) === 'granted';
+				} catch(e) {
+					hasAccess = false;
+				}
+
+				if(hasAccess){
+					unlockSite();
+					return;
+				}
+
+				lockSite();
+
+				form.addEventListener('submit', function(e){
+					e.preventDefault();
+					const entered = passwordInput.value.trim();
+
+					if(entered === SITE_PASSWORD){
+						try {
+							localStorage.setItem(ACCESS_STORAGE_KEY, 'granted');
+						} catch(err) {}
+						error.textContent = '';
+						unlockSite();
+						return;
+					}
+
+					error.textContent = 'Nesprávné heslo. Zkuste to prosím znovu.';
+					passwordInput.select();
+				});
+			});
+		})();
+		</script>
 		<script>
 		// Invite image lightbox: open full-screen on click, close with X/Escape/background
 		(function(){
