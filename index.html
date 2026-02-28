@@ -106,6 +106,74 @@
 		#banner .inner p span{ display:block; white-space:normal; }
 		@media screen and (max-width: 736px){
 			#banner .inner p{ font-size:0.9em; letter-spacing:0.16em; }
+			#banner .inner{ margin-top:6vh !important; }
+			#banner .actions{ margin:1.1em 0 2.2em 0 !important; }
+			#countdown{ bottom:50px !important; }
+			#countdown header.major{ margin:0 0 0.35rem 0; }
+			#countdown header.major h2{ margin:0; }
+			#countdown .countdown-section{ padding:0.35rem 0 0.1rem; }
+			#countdown .countdown-number{ font-size:1.95rem; }
+		}
+		@media screen and (max-width: 335px){
+			#banner, #countdown{ font-size:0.88em; }
+			#banner h2{ font-size:0.96em; padding:0.2em 0.55em; }
+			#banner .inner p{ font-size:0.76em; letter-spacing:0.1em; line-height:1.5; }
+			#banner .actions{ margin:0.9em 0 1.7em 0 !important; }
+			#countdown{ bottom:44px !important; }
+			#countdown .countdown-grid{ flex-wrap:nowrap; gap:0.35rem; justify-content:center; }
+			#countdown .countdown-item{ min-width:56px; }
+			#countdown .countdown-number{ font-size:1.62rem; }
+			#countdown .countdown-label{ font-size:0.64rem; letter-spacing:0.015em; }
+		}
+		@media screen and (min-width: 737px) and (max-width: 1440px){
+			#banner{
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				height:100vh !important;
+				min-height:35em !important;
+				padding:0 !important;
+				background-image:none !important;
+				background-color:transparent !important;
+			}
+			#banner .inner{
+				height:auto !important;
+				min-height:0;
+				margin-top:0 !important;
+			}
+			#banner p{ margin-bottom:2em; }
+			#banner .actions{ margin:1.5em 0 1em 0 !important; }
+			body.landing #page-wrapper,
+			body.is-mobile.landing #page-wrapper{
+				background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("images/od_fotografa.jpg") !important;
+				background-attachment: fixed !important;
+				background-position: center 30% !important;
+				background-repeat: no-repeat !important;
+				background-size: cover !important;
+			}
+			body.is-mobile.landing #banner{ background-image:none !important; }
+			#countdown{
+				position:relative !important;
+				left:auto !important;
+				right:auto !important;
+				bottom:auto !important;
+				margin:0 !important;
+				padding:0 !important;
+			}
+			#countdown.wrapper{
+				background:none !important;
+				padding-top:1.5em !important;
+			}
+			#countdown header.major h2{ margin-top:40px !important; }
+		}
+		@media screen and (min-width: 1281px){
+			#countdown.wrapper{
+				background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("images/od_fotografa.jpg");
+				background-attachment: fixed;
+				background-position: center 30%;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
 		}
 		#banner .actions .button.primary{ background-color:#B4C5CF !important; color:#2e3842 !important; box-shadow:none !important; }
 		#banner .actions .button.primary:hover{ background-color:#a6b8c3 !important; }
@@ -114,7 +182,10 @@
 		/* Modal / lightbox for invite image */
 		.invite-modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.9); z-index:10000; padding:1rem; }
 		.invite-modal img{ max-width:calc(100% - 2rem); max-height:calc(100% - 2rem); box-shadow:0 8px 30px rgba(0,0,0,0.6); border-radius:4px; }
-		.invite-close{ position:absolute; top:1rem; right:1rem; background:transparent; border:none; color:#fff; font-size:2rem; line-height:1; cursor:pointer; }
+		.invite-close{ position:absolute; top:10px; right:10px; left:auto; transform:none; background:rgba(0,0,0,0.2); border:none; color:#fff; font-size:2rem; line-height:1; cursor:pointer; border-radius:50%; padding:5px; z-index:10001; }
+		@media screen and (max-width: 736px){
+			.invite-close{ position:absolute; top:10px; right:10px; left:auto !important; transform:none !important; }
+		}
 		body.modal-open{ overflow:hidden; }
 
 		/* Timeline variables and styles */
@@ -194,12 +265,19 @@
 		.location-address{ font-size:0.95rem; color:#666; line-height:1.6; margin-bottom:1.5rem; }
 		.location-btn{ display:inline-block; padding:0.75rem 1.5rem; background:var(--loc-accent); color:#fff; text-decoration:none; border-radius:4px; font-weight:600; transition:background .2s ease; }
 		.location-btn:hover{ background:#7a96a8; }
+		.nav-buttons{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+		.nav-buttons .location-btn{ width:320px; text-align:center; background:#B4C5CF; color:#2e3842; }
+		.nav-buttons .location-btn:hover{ background:#a6b8c3; }
 		.location-map{ border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.1); overflow:hidden; }
 		.location-map iframe{ width:100%; height:450px; border:none; display:block; }
 		@media (max-width:900px){
 			.location-grid{ grid-template-columns:1fr; gap:2rem; }
 			.location-text h2{ font-size:1.8rem; }
 			.location-map iframe{ height:350px; }
+		}
+		@media (max-width:736px){
+			.nav-buttons{ flex-direction:column; align-items:stretch; }
+			.nav-buttons .location-btn{ width:100%; max-width:320px; }
 		}
 		@media (max-width:480px){
 			#location.wrapper{ padding:2rem 0; }
@@ -287,6 +365,7 @@
 .card.flipped .card-inner{ transform:rotateY(180deg); }
 .card-face{ position:absolute; inset:0; backface-visibility:hidden; display:flex; align-items:center; justify-content:center; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.08); overflow:hidden; }
 .card-back{ background:var(--memory-back); color:var(--info-text); font-size:1.6rem; }
+.memory-heart{ font-size:1.6rem; line-height:1; color:#000000; font-variant-emoji:text; }
 .card-front{ background:var(--memory-front); transform:rotateY(180deg); }
 .card-front img{ width:100%; height:100%; object-fit:cover; display:block; }
 .card.matched .card-face{ box-shadow:0 0 0 6px rgba(143,211,181,0.18); }
@@ -631,7 +710,7 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 								<p>Máte nějaký dotaz nebo nám chcete jen něco vzkázat? Jsme vám k dispozici na telefonu:</p>
 								<ul class="contact-list">
 									<li>David: +420 605 958 839</li>
-									<li>Kája: +420 739 645 296</li>
+									<li>Kája: +420 739 967 200</li>
 								</ul>
 								<p>Moc vás prosíme: Pokud máte jakékoli potravinové intolerance, alergie nebo jiná specifická přání ohledně jídla, dejte nám vědět co nejdříve, abychom pro vás mohli v kuchyni zajistit to nejlepší.</p>
 								<p>V den svatby se prosím s akutními dotazy obracejte na naše svědky:</p>
@@ -729,7 +808,10 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 									<h2>Místo konání</h2>
 									<div class="location-place">Podlešanský mlýn</div>
 									<div class="location-address">Lešany 29<br />257 44 Lešany</div>
-									<a href="https://www.google.com/maps/search/Podlešanský+mlýn+Lešany+29+257+44+Lešany" target="_blank" rel="noopener" class="location-btn">Navigovat (Google Maps)</a>
+									<div class="nav-buttons">
+										<a href="https://www.google.com/maps/search/Podlešanský+mlýn+Lešany+29+257+44+Lešany" target="_blank" rel="noopener" class="location-btn">Navigovat (Google Maps)</a>
+										<a href="https://www.waze.com/ul?ll=49.85173,14.53434&navigate=yes" target="_blank" rel="noopener" class="location-btn">Navigovat (Waze)</a>
+									</div>
 								</div>
 								<!-- Right Column: Map -->
 								<div class="location-map">
@@ -1082,7 +1164,7 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 					const img = document.createElement('img'); img.src = src; img.alt = 'Foto'; front.appendChild(img);
 
 					const back = document.createElement('div'); back.className = 'card-face card-back';
-					back.innerHTML = '<div style="font-size:1.6rem;line-height:1">❤</div>';
+					back.innerHTML = '<div class="memory-heart" aria-hidden="true">❤&#xFE0E;</div>';
 
 					inner.appendChild(front); inner.appendChild(back); card.appendChild(inner);
 					card.addEventListener('click', onCardClick);
