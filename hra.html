@@ -4,147 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Svatební cesta k oltáři</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23B4C5CF' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
         body { margin: 0; background: #B4C5CF; font-family: 'Press Start 2P', cursive; touch-action: none; overflow-x: hidden; }
         
         #game-wrap { 
-            width: 100vw; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding-top: 40px; 
-            padding-bottom: 40px;
-            position: relative;
+            width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; 
+            padding-top: 110px; padding-bottom: 40px; position: relative;
         }
 
+        #stage-container { position: relative; width: 95%; max-width: 800px; }
+
         canvas { 
-            background: linear-gradient(#b3e5fc, #e3f2fd); 
-            border: 6px solid #333; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3); 
-            max-width: 95%; 
-            height: auto; 
-            image-rendering: pixelated; 
-            display: block;
+            background: linear-gradient(#b3e5fc, #e3f2fd); border: 4px solid #333; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 100%; height: auto; 
+            image-rendering: pixelated; display: block;
         }
 
         .ui { 
-            position: absolute; 
-            padding: 25px; 
-            background: white; 
-            border: 4px solid #333; 
-            z-index: 100; 
-            text-align: center; 
-            box-shadow: 10px 10px 0 rgba(0,0,0,0.1); 
+            position: absolute; padding: 20px; background: white; border: 4px solid #333; 
+            z-index: 100; text-align: center; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); 
         }
 
-        /* Vystředění oken přesně nad herní pole */
         #overlay, #start-screen { 
-            top: 240px; /* Polovina výšky canvasu + horní padding */
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            min-width: 360px; 
-            max-width: 90%; 
+            top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 90%; min-width: 300px; max-width: 550px; 
         }
 
         #score-box { 
-            position: absolute; 
-            top: 20px; 
-            left: 20px; 
-            font-size: 10px; 
-            line-height: 1.8; 
-            text-align: left; 
-            z-index: 10;
+            position: absolute; top: 15px; left: 15px; font-size: 10px; line-height: 1.8; 
+            z-index: 10; padding: 12px; min-width: 140px; text-align: left;
+        }
+
+        .back-btn {
+            position: absolute; top: 15px; right: 15px; z-index: 20;
+            padding: 10px 15px !important; font-size: 9px !important;
         }
 
         .btn { 
-            display: inline-block; 
-            padding: 15px 25px; 
-            background: #B4C5CF; 
-            color: white; 
-            border: 4px solid #333; 
-            text-decoration: none; 
-            cursor: pointer; 
-            font-size: 10px; 
-            margin-top: 15px; 
-            text-transform: uppercase; 
+            display: inline-block; padding: 12px 20px; background: #B4C5CF; color: white; 
+            border: 4px solid #333; text-decoration: none; cursor: pointer; font-size: 9px; 
+            margin-top: 15px; text-transform: uppercase; 
         }
 
         .btn:hover { background: #9db0bb; }
-        p { font-size: 8px; line-height: 1.8; margin: 15px 0; }
+        p { font-size: 7px; line-height: 1.7; margin: 12px 0; }
         
-        /* Zarovnaná tabulka */
-        #leaderboard { 
-            position: relative; 
-            margin-top: 30px; 
-            min-width: 360px; 
-            width: 95%; 
-            max-width: 500px; 
-            z-index: 5;
+        .controls-box {
+            font-size: 6px; background: #f0f0f0; padding: 10px; border: 2px solid #333; margin: 15px 0;
         }
 
-        table { width: 100%; font-size: 8px; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
-        th { border-bottom: 3px solid #333; padding-bottom: 10px; text-align: left; }
-        td { padding: 12px 0; border-bottom: 1px solid #eee; text-align: left; overflow: hidden; }
-        
-        /* Šířky sloupců pro perfektní zarovnání */
-        .col-rank { width: 15%; }
-        .col-name { width: 55%; }
-        .col-score { width: 30%; text-align: right; }
+        #leaderboard { position: relative; margin-top: 30px; width: 90%; max-width: 500px; padding: 15px; }
+        table { width: 100%; font-size: 7px; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
+        th { border-bottom: 3px solid #333; padding-bottom: 8px; text-align: left; }
+        td { padding: 10px 0; border-bottom: 1px solid #eee; text-align: left; }
+        .col-rank { width: 15%; } .col-name { width: 50%; } .col-score { width: 35%; text-align: right; }
+
+        @media (max-width: 600px) {
+            #game-wrap { padding-top: 150px; }
+            #score-box { top: 10px; left: 10px; font-size: 8px; min-width: 120px; padding: 10px; }
+            .back-btn { top: 10px; right: 10px; padding: 8px 10px !important; font-size: 7px !important; }
+        }
     </style>
 </head>
 <body>
     <div id="game-wrap">
-        <a href="index.html" class="btn" style="position: absolute; top: 20px; right: 20px; z-index: 20;">ZPĚT NA WEB</a>
+        <a href="index.html" class="btn back-btn">ZPĚT NA WEB</a>
+        <div id="score-box" class="ui">METRY: <span id="dist">0</span>m<br>REKORD: <span id="best">0</span>m</div>
         
-        <div id="score-box" class="ui">
-            METRY: <span id="dist">0</span>m<br>
-            VÁŠ REKORD: <span id="best">0</span>m
-        </div>
-        
-        <div id="start-screen" class="ui">
-            <h2 style="font-size: 14px; color: #B4C5CF; margin-bottom: 20px;">SVATEBNÍ VÝZVA</h2>
-            <p style="text-align: justify;">
-                Ach ne! Kája se zdržela focením u Podlešanského mlýna a teď se musí bleskově dostat k oltáři! David tam už netrpělivě čeká.
-            </p>
-            <p style="font-size: 7px; background: #f0f0f0; padding: 10px; border: 2px solid #333;">
-                <b>OVLÁDÁNÍ:</b><br>
-                PC: MEZERNÍK | MOBIL: DOTYK
-            </p>
-            <button class="btn" onclick="startGame()">BĚŽET K OLTÁŘI!</button>
-        </div>
+        <div id="stage-container">
+            <canvas id="stage" width="800" height="400"></canvas>
 
-        <div id="overlay" class="ui" style="display: none;">
-            <h2 id="status" style="font-size: 16px;">POZOR, ŠPUNT!</h2>
-            <p style="color: #d32f2f; font-weight: bold;">David na tebe stále čeká u oltáře!</p>
-            <div id="save-section">
-                <p>Zadej jméno do tabulky:</p>
-                <input type="text" id="playerName" placeholder="TVOJE JMÉNO" maxlength="10" 
-                       style="font-family: 'Press Start 2P'; font-size: 8px; padding: 10px; width: 200px; border: 4px solid #333; margin-bottom: 10px; text-align: center;">
-                <br>
-                <button id="saveBtn" class="btn" onclick="saveScore()">ULOŽIT VÝKON</button>
+            <div id="start-screen" class="ui">
+                <h2 style="font-size: 14px; color: #B4C5CF; margin-bottom: 15px;">SVATEBNÍ VÝZVA</h2>
+                <p style="text-align: justify;">
+                    Ach ne! Kája se zdržela přípravami na svatbu v Podlešanském mlýně a teď se musí bleskově dostat k oltáři! 
+                </p>
+                <p style="text-align: justify;">
+                    David tam už netrpělivě čekáa jeho motýlek už začíná být nervózní. Pomoz jí prokličkovat mezi dorty a špunty!
+                </p>
+                
+                <div class="controls-box">
+                    <b>OVLÁDÁNÍ:</b><br> <br>
+                    PC: MEZERNÍK | MOBIL: DOTYK NA DISPLEJ
+                </div>
+                
+                <button class="btn" onclick="startGame()">BĚŽET K OLTÁŘI!</button>
             </div>
-            <br>
-            <button class="btn" onclick="reset()">ZKUSIT ZNOVU</button>
-        </div>
 
-        <canvas id="stage" width="800" height="400"></canvas>
+            <div id="overlay" class="ui" style="display: none;">
+                <h2 id="status" style="font-size: 16px;">POZOR, ŠPUNT!</h2>
+                <p>David na tebe stále čeká u oltáře!</p>
+                <div id="save-section">
+                    <input type="text" id="playerName" placeholder="TVOJE JMÉNO" maxlength="10" 
+                           style="font-family: 'Press Start 2P'; font-size: 7px; padding: 8px; width: 80%; border: 3px solid #333; margin-bottom: 8px; text-align: center;">
+                    <br>
+                    <button id="saveBtn" class="btn" onclick="saveScore()">ULOŽIT VÝKON</button>
+                </div>
+                <p id="save-msg" style="color: green; display: none; font-weight: bold; font-size: 8px;">ULOŽENO!</p>
+                <br>
+                <button class="btn" onclick="reset()">HRÁT ZNOVU</button>
+            </div>
+        </div>
 
         <div id="leaderboard" class="ui">
-            <h3 style="font-size: 10px; color: #B4C5CF; margin-bottom: 15px;">TOP 10 BĚŽCŮ</h3>
+            <h3 style="font-size: 9px; color: #B4C5CF; margin-bottom: 10px;">TOP 10 BĚŽCŮ</h3>
             <table>
-                <thead>
-                    <tr>
-                        <th class="col-rank">#</th>
-                        <th class="col-name">JMÉNO</th>
-                        <th class="col-score">METRY</th>
-                    </tr>
-                </thead>
-                <tbody id="scoreBody">
-                    <tr><td colspan="3" style="text-align:center;">Načítám rekordy...</td></tr>
-                </tbody>
+                <thead><tr><th class="col-rank">#</th><th class="col-name">JMÉNO</th><th class="col-score">METRY</th></tr></thead>
+                <tbody id="scoreBody"></tbody>
             </table>
         </div>
     </div>
@@ -153,7 +124,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // --- OPRAVENÁ FIREBASE KONFIGURACE ---
     const firebaseConfig = {
         apiKey: "AIzaSyCAQp04uq_4W2KvuUQv2-5d1NtZN0Zvtk",
         authDomain: "svatba-hra.firebaseapp.com",
@@ -174,14 +144,15 @@
     const bestEl = document.getElementById('best');
     const overlay = document.getElementById('overlay');
     const startScreen = document.getElementById('start-screen');
-    const statusEl = document.getElementById('status');
-
-    let distance = 0, speed = 4.5, isRunning = false, frame = 0;
-    let obstacles = [], groundPos = 0;
+    const statusEl = document.getElementById('status'); // OPRAVA ReferenceError
+    
+    let distance = 0, speed =8.0, isRunning = false, lastTime = 0, frame = 0;
+    let obstacles = [], groundPos = 0, spawnTimer = 0;
     let highScore = localStorage.getItem('svatba_run_best') || 0;
     bestEl.innerText = highScore;
 
-    const bride = { x: 100, y: 260, w: 35, h: 80, dy: 0, jumpPower: -16, gravity: 0.75, onGround: false };
+    // UPRAVENÁ FYZIKA (gravitace 1.2 místo 0.75 pro rychlejší pád)
+    const bride = { x: 80, y: 260, w: 35, h: 80, dy: 0, jumpPower: -18, gravity: 1.2, onGround: false };
 
     function drawPixel(x, y, w, h, c) { ctx.fillStyle = c; ctx.fillRect(Math.floor(x), Math.floor(y), w, h); }
 
@@ -237,127 +208,104 @@
         const cloudX = (frame * 0.3) % 1000;
         drawPixel(900 - cloudX, 50, 60, 20, "#FFF");
         drawPixel(400 - cloudX, 80, 40, 15, "#FFF");
-        drawMill(1100 - (frame * 0.8 % 1500));
+        drawMill(1100 - (groundPos % 1500));
         drawPixel(0, 340, 800, 60, "#d7ccc8");
-        const patternWidth = 100;
-        const offset = groundPos % patternWidth;
-        for (let i = -1; i < (800 / patternWidth) + 1; i++) {
-            drawPixel(i * patternWidth + offset, 345, 50, 5, "#a1887f");
-            drawPixel(i * patternWidth + offset + 20, 370, 30, 3, "#c2b4af");
+        const offset = groundPos % 100;
+        for (let i = -1; i < 9; i++) {
+            drawPixel(i * 100 + offset, 345, 50, 5, "#a1887f");
+            drawPixel(i * 100 + offset + 20, 370, 30, 3, "#c2b4af");
         }
-        groundPos -= speed;
     }
 
-    function drawObstacles() {
+    function update(timestamp) {
+        if (!isRunning) return;
+        const dt = timestamp - lastTime;
+        lastTime = timestamp;
+        const delta = dt / (1000 / 60);
+        if (isNaN(delta) || delta > 3) { requestAnimationFrame(update); return; }
+
+        frame += delta;
+        groundPos -= speed * delta;
+
+        drawWorld();
+        drawAltar();
+
+        // FYZIKA SKOKU S DELTA TIME
+        bride.dy += bride.gravity * delta;
+        bride.y += bride.dy * delta;
+        if (bride.y > 260) { bride.y = 260; bride.dy = 0; bride.onGround = true; }
+        drawBride(bride);
+
+        spawnTimer += dt;
+        if (spawnTimer > (1200 / (speed / 8))) {
+            const isAir = Math.random() > 0.8;
+            obstacles.push({ x: 850, y: isAir ? 210 : 295, w: 55, h: 45, type: isAir ? 'CORK' : 'CAKE' });
+            spawnTimer = 0;
+        }
+
         obstacles.forEach((o, i) => {
-            o.x -= speed;
+            o.x -= speed * delta;
             if (o.type === 'CAKE') {
-                drawPixel(o.x, o.y + 20, 45, 25, "#fce4ec"); 
-                drawPixel(o.x + 8, o.y + 5, 30, 15, "#f8bbd0"); 
-                drawPixel(o.x + 15, o.y - 5, 15, 10, "#f48fb1"); 
-                drawPixel(o.x + 20, o.y - 12, 6, 6, "#d32f2f");
+                drawPixel(o.x, o.y + 20, 45, 25, "#fce4ec"); drawPixel(o.x + 8, o.y + 5, 30, 15, "#f8bbd0");
+                drawPixel(o.x + 15, o.y - 5, 15, 10, "#f48fb1"); drawPixel(o.x + 20, o.y - 12, 6, 6, "#d32f2f");
             } else {
-                drawPixel(o.x + 15, o.y + 12, 35, 16, "#c4a484"); 
-                drawPixel(o.x, o.y + 7, 20, 26, "#d2b48c"); 
+                drawPixel(o.x + 15, o.y + 12, 35, 16, "#c4a484"); drawPixel(o.x, o.y + 7, 20, 26, "#d2b48c");
                 drawPixel(o.x + 22, o.y + 10, 6, 20, "#8b4513");
             }
 
-            if (bride.x < o.x + o.w - 10 && bride.x + bride.w - 10 > o.x &&
-                bride.y < o.y + o.h - 10 && bride.y + bride.h - 10 > o.y) {
-                endGame(o.type);
+            if (bride.x < o.x + o.w - 10 && bride.x + bride.w - 10 > o.x && bride.y < o.y + o.h - 10 && bride.y + bride.h - 10 > o.y) {
+                isRunning = false; overlay.style.display = 'block'; 
+                statusEl.innerText = (o.type === 'CORK') ? "POZOR, ŠPUNT!" : "POZOR, DORT!";
             }
 
             if (o.x < -100) {
                 obstacles.splice(i, 1);
                 distance += 10; distEl.innerText = distance;
-                if (distance % 100 === 0 && speed < 15) speed += 0.25;
+                if (distance % 100 === 0 && speed < 18) speed += 0.3;
             }
         });
-    }
-
-    function spawn() {
-        if (frame % 100 === 0) {
-            const isAir = Math.random() > 0.8;
-            obstacles.push({ x: 850, y: isAir ? 210 : 295, w: 55, h: 45, type: isAir ? 'CORK' : 'CAKE' });
-        }
-    }
-
-    function update() {
-        if (!isRunning) return;
-        frame++;
-        drawWorld();
-        drawAltar();
-        bride.dy += bride.gravity;
-        bride.y += bride.dy;
-        if (bride.y > 260) { bride.y = 260; bride.dy = 0; bride.onGround = true; }
-        drawBride(bride);
-        spawn();
-        drawObstacles();
         requestAnimationFrame(update);
     }
 
-    window.startGame = function() { isRunning = true; startScreen.style.display = 'none'; update(); };
-
-    window.reset = function() {
-        distance = 0; speed = 4.5; isRunning = true; frame = 0;
-        obstacles = []; bride.y = 260; overlay.style.display = 'none';
+    window.startGame = () => { isRunning = true; startScreen.style.display = 'none'; lastTime = performance.now(); requestAnimationFrame(update); };
+    
+    window.reset = () => { 
+        distance = 0; speed = 8.0; isRunning = true; frame = 0; obstacles = []; bride.y = 260; 
+        overlay.style.display = 'none'; 
         document.getElementById('save-section').style.display = 'block';
-        update();
+        document.getElementById('save-msg').style.display = 'none';
+        lastTime = performance.now(); 
+        requestAnimationFrame(update); 
     };
-
-    function endGame(type) {
-        isRunning = false;
-        overlay.style.display = 'block';
-        statusEl.innerText = (type === 'CORK') ? "POZOR, ŠPUNT!" : "POZOR, DORT!";
-        if (distance > highScore) {
-            highScore = distance; localStorage.setItem('svatba_run_best', highScore);
-            bestEl.innerText = highScore;
-        }
-    }
-
-    window.saveScore = function() {
-        const name = document.getElementById('playerName').value.trim().toUpperCase();
-        if (name.length > 0 && distance > 0) {
-            push(ref(db, 'leaderboard'), { name: name, score: distance })
-            .then(() => {
+    
+    window.saveScore = () => {
+        const nameInput = document.getElementById('playerName');
+        const name = nameInput.value.trim().toUpperCase();
+        if (name && distance > 0) { 
+            push(ref(db, 'leaderboard'), { name, score: distance }).then(() => { 
                 document.getElementById('save-section').style.display = 'none';
-                alert("VÝKON ULOŽEN!");
-            });
-        } else { alert("Zadej jméno!"); }
+                document.getElementById('save-msg').style.display = 'block';
+                if (distance > highScore) {
+                    highScore = distance; localStorage.setItem('svatba_run_best', highScore);
+                    bestEl.innerText = highScore;
+                }
+                nameInput.value = "";
+            }); 
+        } 
     };
 
-    // Živé načítání s pevným zarovnáním sloupců
     onValue(query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10)), (snapshot) => {
-        const data = snapshot.val();
-        const scoreBody = document.getElementById('scoreBody');
-        scoreBody.innerHTML = "";
+        const data = snapshot.val(); const scoreBody = document.getElementById('scoreBody'); scoreBody.innerHTML = "";
         if (data) {
-            const sorted = Object.values(data).sort((a, b) => b.score - a.score);
-            sorted.forEach((entry, index) => {
-                scoreBody.innerHTML += `
-                    <tr>
-                        <td class="col-rank">${index + 1}.</td>
-                        <td class="col-name">${entry.name}</td>
-                        <td class="col-score">${entry.score}m</td>
-                    </tr>`;
+            Object.values(data).sort((a,b) => b.score - a.score).forEach((e, i) => {
+                scoreBody.innerHTML += `<tr><td class="col-rank">${i+1}.</td><td class="col-name">${e.name}</td><td class="col-score">${e.score}m</td></tr>`;
             });
         } else { scoreBody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Zatím žádné rekordy.</td></tr>"; }
     });
 
-    function jump() { if (bride.onGround && isRunning) { bride.dy = bride.jumpPower; bride.onGround = false; } }
-
-    // OVLÁDÁNÍ - BLOKUJE POSUN STRÁNKY MEZERNÍKEM
-    window.addEventListener('keydown', e => { 
-        if(e.code === 'Space') { 
-            e.preventDefault(); 
-            jump(); 
-        } 
-    });
-
-    canvas.addEventListener('touchstart', e => { 
-        e.preventDefault(); 
-        jump(); 
-    });
+    const jump = () => { if (bride.onGround && isRunning) { bride.dy = bride.jumpPower; bride.onGround = false; } };
+    window.addEventListener('keydown', e => { if(e.code === 'Space') { e.preventDefault(); jump(); } });
+    canvas.addEventListener('touchstart', e => { e.preventDefault(); jump(); });
 
     drawWorld(); drawAltar(); drawBride(bride);
 </script>
