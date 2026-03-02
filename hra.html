@@ -82,10 +82,10 @@
             <div id="start-screen" class="ui">
                 <h2 style="font-size: 14px; color: #B4C5CF; margin-bottom: 15px;">SVATEBNÍ VÝZVA</h2>
                 <p style="text-align: justify;">
-                    Ach ne! Kája se zdržela přípravami na svatbu v Podlešanském mlýně a teď se musí bleskově dostat k oltáři! 
+                    Ach ne! Kája se zdržela svatebními přípravami v Podlešanském mlýně a teď se musí bleskově dostat k oltáři! 
                 </p>
                 <p style="text-align: justify;">
-                    David tam už netrpělivě čekáa jeho motýlek už začíná být nervózní. Pomoz jí prokličkovat mezi dorty a špunty!
+                    David tam už netrpělivě čeká a jeho motýlek už začíná být nervózní. Pomoz jí prokličkovat mezi dorty a špunty!
                 </p>
                 
                 <div class="controls-box">
@@ -144,15 +144,15 @@
     const bestEl = document.getElementById('best');
     const overlay = document.getElementById('overlay');
     const startScreen = document.getElementById('start-screen');
-    const statusEl = document.getElementById('status'); // OPRAVA ReferenceError
+    const statusEl = document.getElementById('status'); 
     
-    let distance = 0, speed =8.0, isRunning = false, lastTime = 0, frame = 0;
+    let distance = 0, speed = 8.0, isRunning = false, lastTime = 0, frame = 0;
     let obstacles = [], groundPos = 0, spawnTimer = 0;
     let highScore = localStorage.getItem('svatba_run_best') || 0;
     bestEl.innerText = highScore;
 
-    // UPRAVENÁ FYZIKA (gravitace 1.2 místo 0.75 pro rychlejší pád)
-    const bride = { x: 80, y: 260, w: 35, h: 80, dy: 0, jumpPower: -18, gravity: 1.2, onGround: false };
+    // VYBALANCOVANÁ FYZIKA (gravitace 1.4, jumpPower -22 pro svižný skok)
+    const bride = { x: 80, y: 260, w: 35, h: 80, dy: 0, jumpPower: -22, gravity: 1.4, onGround: false };
 
     function drawPixel(x, y, w, h, c) { ctx.fillStyle = c; ctx.fillRect(Math.floor(x), Math.floor(y), w, h); }
 
@@ -182,7 +182,7 @@
         drawPixel(x + 30, my + 120, 20, 30, "#3e2723");
         drawPixel(x + 20, my + 30, 15, 15, "#333");
         drawPixel(x + 45, my + 30, 15, 15, "#333");
-        ctx.save(); ctx.translate(x + 40, my + 60); ctx.rotate(frame * 0.03); ctx.strokeStyle = "#424242"; ctx.lineWidth = 6;
+        ctx.save(); ctx.translate(x + 40, my + 60); ctx.rotate(frame * 0.05); ctx.strokeStyle = "#424242"; ctx.lineWidth = 6;
         for(let i=0; i<4; i++) { ctx.rotate(Math.PI / 2); ctx.strokeRect(0, -10, 100, 25); ctx.fillStyle = "rgba(66,66,66,0.3)"; ctx.fillRect(0, -10, 100, 25); }
         ctx.restore();
     }
@@ -205,10 +205,14 @@
 
     function drawWorld() {
         ctx.clearRect(0,0,800,400);
-        const cloudX = (frame * 0.3) % 1000;
+        const cloudX = (frame * 0.4) % 1000;
         drawPixel(900 - cloudX, 50, 60, 20, "#FFF");
         drawPixel(400 - cloudX, 80, 40, 15, "#FFF");
-        drawMill(1100 - (groundPos % 1500));
+        
+        // OPRAVENÁ POZICE MLÝNA (pohybuje se nezávisle na groundPos)
+        const millX = 1000 - ((frame * 2) % 1800);
+        drawMill(millX);
+        
         drawPixel(0, 340, 800, 60, "#d7ccc8");
         const offset = groundPos % 100;
         for (let i = -1; i < 9; i++) {
@@ -237,7 +241,7 @@
         drawBride(bride);
 
         spawnTimer += dt;
-        if (spawnTimer > (1200 / (speed / 8))) {
+        if (spawnTimer > (1100 / (speed / 8))) {
             const isAir = Math.random() > 0.8;
             obstacles.push({ x: 850, y: isAir ? 210 : 295, w: 55, h: 45, type: isAir ? 'CORK' : 'CAKE' });
             spawnTimer = 0;
