@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Létající kytice</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23B4C5CF' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body { margin: 0; background: #B4C5CF; font-family: 'Press Start 2P', cursive; overflow-x: hidden; }
+        
+        #game-wrap { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-top: 110px; padding-bottom: 40px; position: relative; }
+        #stage-container { position: relative; width: 95%; max-width: 400px; }
+        
+        canvas { background: linear-gradient(#b3e5fc, #e3f2fd); border: 4px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 100%; height: auto; display: block; image-rendering: pixelated; touch-action: manipulation; }
+        
+        .ui { position: absolute; padding: 20px; background: white; border: 4px solid #333; z-index: 100; text-align: center; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); }
+        #overlay, #start-screen { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; }
+        #score-box { position: absolute; top: 15px; left: 15px; font-size: 10px; line-height: 1.8; z-index: 10; padding: 12px; min-width: 140px; text-align: left; }
+        .back-btn { position: absolute; top: 15px; right: 15px; z-index: 20; padding: 10px 15px !important; font-size: 9px !important; }
+        .btn { display: inline-block; padding: 12px 20px; background: #B4C5CF; color: white; border: 4px solid #333; text-decoration: none; cursor: pointer; font-size: 9px; margin-top: 15px; text-transform: uppercase; }
+        p { font-size: 7px; line-height: 1.7; margin: 12px 0; }
+        
+        /* Box s ovládáním pod popisem */
+        .controls-info { font-size: 6px; background: #f0f0f0; padding: 10px; border: 2px solid #333; margin: 15px 0; line-height: 1.5; }
+
+        #leaderboard { position: relative; margin-top: 30px; width: 90%; max-width: 400px; padding: 15px; }
+        table { width: 100%; font-size: 7px; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
+        td { padding: 10px 0; border-bottom: 1px solid #eee; text-align: left; overflow: hidden; }
+        .col-score { text-align: right; width: 35%; }
+        @media (max-width: 600px) { #game-wrap { padding-top: 150px; } #score-box, .back-btn { top: 10px; font-size: 8px; } }
+    </style>
+</head>
+<body>
+    <div id="game-wrap">
+        <a href="index.html" class="btn back-btn">ZPĚT</a>
+        <div id="score-box" class="ui">BODY: <span id="dist">0</span><br>REKORD: <span id="best">0</span></div>
+        
+        <div id="stage-container">
+            <canvas id="stage" width="400" height="600"></canvas>
+            
+            <div id="start-screen" class="ui">
+                <h2 style="font-size: 14px; color: #B4C5CF; margin-bottom: 15px;">HOD KYTICÍ</h2>
+                <p style="text-align: justify;">Kája právě hodila kytici! Zachraň ji před svatbychtivými družičkami a prolet' mezi sloupy co nejdále.</p>
+                
+                <div class="controls-info">
+                    <b>JAK HRÁT:</b><br>
+                    PC: MEZERNÍK<br>
+                    MOBIL: DOTYK NA DISPLEJ
+                </div>
+                
+                <button class="btn" onclick="startGame()">LEŤ!</button>
+            </div>
+
+            <div id="overlay" class="ui" style="display: none;">
+                <h2 id="status" style="font-size: 14px; line-height: 1.4;">AU! KYTICE SKONČILA V POLÉVCE!</h2>
+                <p>Příště se musíš víc snažit!</p>
+                <div id="save-section">
+                    <input type="text" id="playerName" placeholder="TVOJE JMÉNO" maxlength="10" style="font-family:'Press Start 2P'; font-size:7px; padding:10px; width:80%; border:3px solid #333; text-align:center; margin-bottom: 10px;">
+                    <br>
+                    <button id="saveBtn" class="btn" onclick="saveScore()">ULOŽIT REKORD</button>
+                </div>
+                <p id="save-msg" style="color: green; display: none; font-weight: bold; font-size: 8px;">ULOŽENO!</p>
+                <button class="btn" onclick="reset()">ZNOVU</button>
+            </div>
+        </div>
+
+        <div id="leaderboard" class="ui">
+            <h3 style="font-size: 9px; color: #B4C5CF; margin-bottom: 10px;">TOP 10 DRUŽIČEK</h3>
+            <table>
+                <thead><tr><th style="text-align:left; width:15%;">#</th><th style="text-align:left; width:50%;">JMÉNO</th><th class="col-score">BODY</th></tr></thead>
+                <tbody id="scoreBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCAQp04uq_4W2KvuUQv2-5d1NtZN0Zvtk",
+        authDomain: "svatba-hra.firebaseapp.com",
+        databaseURL: "https://svatba-hra-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "svatba-hra",
+        storageBucket: "svatba-hra.firebasestorage.app",
+        messagingSenderId: "243975073585",
+        appId: "1:243975073585:web:af2d63fed12345de514a10",
+        measurementId: "G-V213PGSKMY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const distEl = document.getElementById('dist');
+    const bestEl = document.getElementById('best');
+    const overlay = document.getElementById('overlay');
+    const startScreen = document.getElementById('start-screen');
+    const statusEl = document.getElementById('status');
+    
+    let score = 0, isRunning = false, lastTime = 0, frame = 0;
+    let pipes = [], pipeTimer = 0;
+    let highScore = localStorage.getItem('svatba_kytice_best') || 0;
+    bestEl.innerText = highScore;
+
+    let currentSpeed = 2.5;
+    let spawnRate = 1500;
+
+    const kytice = { x: 80, y: 300, radius: 18, velocity: 0, gravity: 0.4, lift: -7 };
+
+    function drawBouquet(x, y) {
+        ctx.save();
+        ctx.fillStyle = "#2E7D32"; ctx.fillRect(x - 4, y + 5, 8, 22); 
+        ctx.fillStyle = "#4CAF50"; ctx.fillRect(x - 14, y + 2, 10, 10); ctx.fillRect(x + 4, y + 2, 10, 10); 
+        ctx.fillStyle = "#FFF"; ctx.fillRect(x - 16, y - 16, 12, 12); ctx.fillRect(x + 4, y - 14, 12, 12); 
+        ctx.fillStyle = "#F8BBD0"; ctx.fillRect(x - 4, y - 22, 12, 12);
+        ctx.fillStyle = "#F48FB1"; ctx.fillRect(x - 10, y - 6, 12, 12); ctx.fillRect(x + 2, y - 4, 12, 12); 
+        ctx.fillStyle = "#F06292"; ctx.fillRect(x - 6, y - 12, 12, 12); 
+        ctx.restore();
+    }
+
+    function drawPipe(x, y, w, h, isTop) {
+        ctx.save();
+        const pipeColor = "#75b855"; ctx.fillStyle = pipeColor; ctx.fillRect(x, y, w, h);
+        ctx.strokeStyle = "#51853a"; ctx.lineWidth = 4; ctx.strokeRect(x, y, w, h);
+        const capH = 30, capO = 5;
+        if (isTop) {
+            ctx.fillRect(x - capO, y + h - capH, w + capO * 2, capH);
+            ctx.strokeRect(x - capO, y + h - capH, w + capO * 2, capH);
+        } else {
+            ctx.fillRect(x - capO, y, w + capO * 2, capH);
+            ctx.strokeRect(x - capO, y, w + capO * 2, capH);
+        }
+        ctx.restore();
+    }
+
+    function update(timestamp) {
+        if (!isRunning) return;
+        const dt = timestamp - lastTime;
+        lastTime = timestamp;
+        const delta = dt / (1000 / 60);
+        if (isNaN(delta) || delta > 3) { requestAnimationFrame(update); return; }
+
+        frame += delta;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        kytice.velocity += kytice.gravity * delta;
+        kytice.y += kytice.velocity * delta;
+        drawBouquet(kytice.x, kytice.y);
+
+        pipeTimer += dt;
+        if (pipeTimer > spawnRate) {
+            const gap = 150;
+            const topY = Math.random() * (canvas.height - gap - 200) + 100;
+            pipes.push({ x: 450, topY: topY, bottomY: topY + gap, passed: false });
+            pipeTimer = 0;
+        }
+
+        pipes.forEach((p, i) => {
+            p.x -= currentSpeed * delta; 
+            drawPipe(p.x, 0, 70, p.topY, true);
+            drawPipe(p.x, p.bottomY, 70, canvas.height - p.bottomY, false);
+
+            if (kytice.x + 12 > p.x && kytice.x - 12 < p.x + 70) {
+                if (kytice.y - 12 < p.topY || kytice.y + 12 > p.bottomY) endGame();
+            }
+            if (!p.passed && p.x + 70 < kytice.x) {
+                score++; 
+                p.passed = true; 
+                distEl.innerText = score;
+                
+                // OBTÍŽNOST: Každých 10 bodů mírný nárůst
+                if (score > 0 && score % 10 === 0) {
+                    currentSpeed += 0.2; 
+                    if (spawnRate > 1000) spawnRate -= 50; 
+                }
+            }
+        });
+
+        pipes = pipes.filter(p => p.x > -100);
+        if (kytice.y > canvas.height || kytice.y < 0) endGame();
+
+        requestAnimationFrame(update);
+    }
+
+    function endGame() { 
+        isRunning = false; 
+        overlay.style.display = 'block'; 
+        // Náhodný výběr vtipné hlášky
+        const msgs = ["AU! KYTICE SKONČILA V POLÉVCE!", "PRÁSK! DRUŽIČKY TĚ UŠLAPALY!", "Chytil ji strýček z pátého kolene! To bude hodně divná svatba...", "Kytice je v dortu! Aspoň je teď víc 'bio'.", "Družičky se o ni popraly tak moc, že zbyl jen stonek!"];
+        statusEl.innerText = msgs[Math.floor(Math.random() * msgs.length)];
+    }
+
+    window.startGame = () => { 
+        isRunning = true; startScreen.style.display = 'none'; lastTime = performance.now(); 
+        pipeTimer = 1000; requestAnimationFrame(update); 
+    };
+
+    window.reset = () => { 
+        score = 0; currentSpeed = 2.5; spawnRate = 1500;
+        distEl.innerText = 0; kytice.y = 300; kytice.velocity = 0; pipes = []; isRunning = true; overlay.style.display = 'none'; 
+        document.getElementById('save-section').style.display = 'block'; document.getElementById('save-msg').style.display = 'none'; 
+        lastTime = performance.now(); pipeTimer = 1000; requestAnimationFrame(update); 
+    };
+    
+    window.saveScore = () => {
+        const nameInput = document.getElementById('playerName');
+        const name = nameInput.value.trim().toUpperCase();
+        if (name && score > 0) {
+            push(ref(db, 'leaderboard_kytice'), { name, score }).then(() => {
+                document.getElementById('save-section').style.display = 'none';
+                document.getElementById('save-msg').style.display = 'block';
+                if (score > highScore) { highScore = score; localStorage.setItem('svatba_kytice_best', highScore); bestEl.innerText = highScore; }
+                nameInput.value = "";
+            });
+        }
+    };
+
+    onValue(query(ref(db, 'leaderboard_kytice'), orderByChild('score'), limitToLast(10)), (snapshot) => {
+        const data = snapshot.val(); const scoreBody = document.getElementById('scoreBody'); scoreBody.innerHTML = "";
+        if (data) {
+            Object.values(data).sort((a,b) => b.score - a.score).forEach((e, i) => {
+                scoreBody.innerHTML += `<tr><td style="padding:10px 0;">${i+1}.</td><td style="padding:10px 0;">${e.name}</td><td class="col-score" style="padding:10px 0;">${e.score}</td></tr>`;
+            });
+        } else { scoreBody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Zatím žádné body.</td></tr>"; }
+    });
+
+    const jump = (e) => { 
+        if (e) {
+            if (e.type === 'keydown' && e.code === 'Space') e.preventDefault();
+            if (e.type === 'touchstart') e.preventDefault();
+        }
+        if (isRunning) kytice.velocity = kytice.lift; 
+    };
+
+    window.addEventListener('keydown', e => { if(e.code === 'Space') jump(e); });
+    canvas.addEventListener('touchstart', jump, { passive: false });
+</script>
+</body>
+</html>
