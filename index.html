@@ -768,7 +768,7 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 											<div id="weather-updated">Aktualizováno: —</div>
 											<div class="weather-actions"><button id="weather-refresh" class="button small">Aktualizovat</button></div>
 										</div>
-										<div class="weather-badge">Agregovaná data z modelů ECMWF, GFS a ICON</div>
+										<div class="weather-badge">Model ECMWF</div>
 									</div>
 								</div>
 							</div>
@@ -1057,7 +1057,7 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 				try{
 					const ymd = dt => dt.toISOString().slice(0,10);
 					const start = new Date(WEDDING_DATE); const end = new Date(WEDDING_DATE);
-					const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe%2FPrague&start_date=${ymd(start)}&end_date=${ymd(end)}`;
+					const url = `https://api.open-meteo.com/v1/ecmwf?latitude=${LAT}&longitude=${LON}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe%2FPrague&start_date=${ymd(start)}&end_date=${ymd(end)}`;
 					const res = await fetch(url);
 					if(!res.ok) throw new Error('Network');
 					const data = await res.json();
@@ -1069,7 +1069,7 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 					if(tempEl()) tempEl().textContent = `${Math.round((tempMax+tempMin)/2)}°C ( ${Math.round(tempMin)}–${Math.round(tempMax)}°C )`;
 					if(descEl()) descEl().textContent = `${map[0]} — ${LOCATION_LABEL}`;
 					renderIcon(forecastSvgEl(), map[1]);
-					if(updatedEl()) updatedEl().textContent = 'Live • ' + formatTS(new Date());
+					if(updatedEl()) updatedEl().textContent = 'Live (ECMWF)• ' + formatTS(new Date());
 				}catch(err){
 					console.error('Live forecast failed, falling back to historical:', err);
 					await showHistorical();
