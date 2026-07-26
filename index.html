@@ -1066,7 +1066,7 @@ body.site-unlocked #page-wrapper{ visibility:visible; }
 					const tempMin = data.daily.temperature_2m_min[dayIdx];
 					const code = data.daily.weathercode[dayIdx];
 					const map = weatherMap[code] || ['Neurčeno','partly-sunny'];
-					if(tempEl()) tempEl().textContent = `${Math.round((tempMax+tempMin)/2)}°C ( ${Math.round(tempMin)}–${Math.round(tempMax)}°C )`;
+					if(tempEl()) tempEl().textContent = `${Math.round(tempMin)}–${Math.round(tempMax)}°C `;
 					if(descEl()) descEl().textContent = `${map[0]} — ${LOCATION_LABEL}`;
 					renderIcon(forecastSvgEl(), map[1]);
 					if(updatedEl()) updatedEl().textContent = 'Live (ECMWF)• ' + formatTS(new Date());
